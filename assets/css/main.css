@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#__nuxt .theme--light.v-divider {
+  border-color: var(--v-grey-300-base);
+}
