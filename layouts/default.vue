@@ -3,12 +3,15 @@
     <Header />
 
     <v-main>
-      <Nuxt />
+      <v-slide-x-transition>
+        <Nuxt />
+      </v-slide-x-transition>
     </v-main>
 
     <Footer />
 
-    <DialogAuth />
+    <LazyDialogAuth />
+    <LazyDialogUserSettings />
   </v-app>
 </template>
 
