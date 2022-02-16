@@ -98,7 +98,11 @@ module.exports = {
         xl: '12px',
         full: '9999px',
     },
-    spacing: {},
+    spacing: {
+        //   generate spacings from (-500 to 500)px
+        ...getEntries(501, (index) => [index, `${index}px`]),
+        ...getEntries(500, (index) => [`-${index + 1}`, `-${index + 1}px`]),
+    },
     zIndex: {
         ...getEntries(20, (index) => [index, `${index}`]),
     },
