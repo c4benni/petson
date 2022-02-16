@@ -102,6 +102,7 @@ export default {
                     'error-text': '#1d0302',
                     'error-background': '#fcd2cf',
 
+                    grey: '#9FA2B4',
                     'grey-50': '#FAFAFA',
                     'grey-100': '#F4F6F5',
                     'grey-300': '#DDE3E2',
