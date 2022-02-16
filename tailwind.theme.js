@@ -23,6 +23,12 @@ module.exports = {
         sans: ['Roboto', 'sans-serif'],
     },
     fontSize: {
+        xxs: [
+            '12px',
+            {
+                lineHeight: '19.92px',
+            },
+        ],
         xs: [
             '13px',
             {

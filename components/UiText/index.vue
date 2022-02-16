@@ -31,9 +31,18 @@ export default {
       type: String,
       default: 'md',
       validator: (prop) =>
-        ['xs', 'sm', 'md', 'mdlg', 'lg', 'xl', '2xl', '4xl', 'custom'].includes(
-          trimmedLowerCase(prop)
-        ),
+        [
+          'xxs',
+          'xs',
+          'sm',
+          'md',
+          'mdlg',
+          'lg',
+          'xl',
+          '2xl',
+          '4xl',
+          'custom',
+        ].includes(trimmedLowerCase(prop)),
     },
     weight: {
       type: Number,
