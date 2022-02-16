@@ -5,6 +5,7 @@
       label="Email Address *"
       type="email"
       required
+      autofocus
     />
 
     <TextFieldPassword v-model="password" />
