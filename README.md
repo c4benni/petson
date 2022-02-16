@@ -19,6 +19,14 @@ $ npm run generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
+## Components
+
+Custom components are created and automatically imported using NuxtJS Component structure;
+This means a path like components/Button/index.vue will yield `<Button/>` and a path like components/Tables/Head will yield `<TableHead/>`.
+Read more about it [here](https://nuxtjs.org/docs/2.x/directory-structure/components).
+
+> Vuetify core components are kebab-cased e.g `<v-btn/>` while custom components are PascalCased eg `<Button/>`
+
 ## Special Directories
 
 You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
@@ -40,7 +48,6 @@ More information about the usage of this directory in [the documentation](https:
 Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
 
 ### `pages`
 
