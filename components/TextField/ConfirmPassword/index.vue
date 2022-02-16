@@ -1,5 +1,5 @@
 <template>
-  <TextFieldPassword v-model="vModel" :label="label" :rules="selfRules" />
+  <TextFieldPassword v-model="modelSync" :label="label" :rules="selfRules" />
 </template>
 
 <script>

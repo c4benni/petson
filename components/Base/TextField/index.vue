@@ -1,6 +1,6 @@
 <template>
   <v-text-field
-    v-model="vModel"
+    v-model="modelSync"
     :type="type"
     :rules="getRules"
     :label="label"

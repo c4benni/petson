@@ -1,7 +1,7 @@
-import vModel from './vModel'
+import modelSync from './modelSync'
 export default {
     mixins: [
-        vModel({
+        modelSync({
             type: String,
             default: '',
         }),

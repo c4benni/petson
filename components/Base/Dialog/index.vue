@@ -1,6 +1,6 @@
 <template>
   <v-dialog
-    v-model="vModel"
+    v-model="modelSync"
     :transition="transition"
     :content-class="`${contentClass} elevation-2`"
     overlay-color="#000"
@@ -9,7 +9,7 @@
     <v-card>
       <header class="p-[24px] flex justify-end pb-[6px]">
         <Tooltip label="Close">
-          <v-icon @click="vModel = false">mdi-close</v-icon>
+          <v-icon @click="modelSync = false">mdi-close</v-icon>
         </Tooltip>
       </header>
 
@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import vModel from '@/components/mixins/vModel'
+import modelSync from '@/components/mixins/modelSync'
 import { undefinedStringProp } from '@/components/utils/index'
 
 export default {
   name: 'BaseDialog',
-  mixins: [vModel(Boolean)],
+  mixins: [modelSync(Boolean)],
   props: {
     transition: undefinedStringProp,
     contentClass: undefinedStringProp,

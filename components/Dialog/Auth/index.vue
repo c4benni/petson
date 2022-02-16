@@ -1,7 +1,7 @@
 <template>
   <BaseDialog
     v-if="currentForm"
-    v-model="vModel"
+    v-model="modelSync"
     :transition="transition"
     content-class="w-[557px] auth-dialog"
   >
@@ -48,7 +48,7 @@ export default {
 
   head() {
     return {
-      title: this.vModel ? this.title : undefined,
+      title: this.modelSync ? this.title : undefined,
     }
   },
 
@@ -56,7 +56,7 @@ export default {
     modalQuery() {
       return this.$route.query.modal
     },
-    vModel: {
+    modelSync: {
       get() {
         if (typeof this.modalQuery === 'string') {
           if (validForms.includes(this.modalQuery)) {
@@ -87,7 +87,7 @@ export default {
     },
 
     transition() {
-      if (this.vModel) {
+      if (this.modelSync) {
         return 'slide-y-transition'
       }
       return 'slide-y-reverse-transition'
@@ -103,7 +103,7 @@ export default {
 
   methods: {
     setCurrentForm(val) {
-      if (val && this.vModel) {
+      if (val && this.modelSync) {
         this.currentForm = `form-${this.modalQuery}`
 
         // set title to capitalized route.query.modal

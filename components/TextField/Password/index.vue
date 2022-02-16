@@ -1,6 +1,6 @@
 <template>
   <BaseTextField
-    v-model="vModel"
+    v-model="modelSync"
     :type="show ? 'text' : 'password'"
     :label="label"
     :append-icon="appendIcon"
@@ -31,7 +31,7 @@ export default {
 
   computed: {
     appendIcon() {
-      if (!this.vModel?.length) {
+      if (!this.modelSync?.length) {
         return undefined
       }
 
@@ -41,7 +41,7 @@ export default {
 
   methods: {
     onFocus() {
-      if (!this.vModel) {
+      if (!this.modelSync) {
         this.show = false
       }
     },

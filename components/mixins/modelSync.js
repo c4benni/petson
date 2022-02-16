@@ -1,8 +1,8 @@
-export default function vModel(
+export default function modelSync(
     propConfig = {},
     prop = 'modelValue',
     event = 'update:modelValue',
-    computedName = 'vModel'
+    computedName = 'modelSync'
 ) {
     return {
         model: {
