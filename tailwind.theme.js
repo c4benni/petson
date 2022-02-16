@@ -33,13 +33,14 @@ module.exports = {
             '13px',
             {
                 lineHeight: '17.94px',
+                letterSpacing: '0.15px',
             },
         ],
         sm: [
             '14px',
             {
-                lineHeight: '20.02px',
-                letterSpacing: '0.25px',
+                lineHeight: '20px',
+                letterSpacing: '0.15px',
             },
         ],
         base: [
@@ -79,6 +80,12 @@ module.exports = {
             {
                 lineHeight: '44px',
                 letterSpacing: '-2%',
+            },
+        ],
+        '3xl': [
+            '48px',
+            {
+                lineHeight: '56px',
             },
         ],
         '4xl': [
