@@ -80,7 +80,7 @@ export default {
                     accent: colors.grey.darken3,
                     secondary: {
                         base: '#F09E00',
-                        lighten5: 'rgba(240, 158, 0, 0.08)',
+                        lighten5: '#291b00',
                         darken4: '#C66100',
                     },
                     info: '#2196F3',
