@@ -92,9 +92,6 @@ module.exports = {
     colors: {
         current: 'currentColor',
         inherit: 'inherit',
-        disabled: 'rgba(0, 0, 0, 0.26)',
-        white: '#FFF',
-        black: '#000',
     },
     borderRadius: {
         none: '0px',

@@ -9,7 +9,7 @@
       <v-row justify="center" no-gutters>
         <v-col cols="12" class="flex justify-center">
           <div
-            class="w-92 h-92 rounded-full primary text-white grid mb-[24px] justify-items-center gap-y-4 content-center"
+            class="w-92 h-92 rounded-full primary white--text grid mb-[24px] justify-items-center gap-y-4 content-center"
           >
             <Logo height="42.41" width="46.98" />
             <UiText tag="span" label="petson." size="xs" />
@@ -21,7 +21,7 @@
             id="dialog-title"
             tag="h2"
             :label="title"
-            variant="title"
+            variant="primary"
             size="lg"
             class="text-center mb-[24px]"
           />

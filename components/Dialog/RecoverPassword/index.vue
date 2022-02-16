@@ -8,13 +8,14 @@
     <v-container class="mt-[18px] w-[424px] pb-[68px] px-0">
       <v-row>
         <v-col>
-          <v-alert text type="info" color="info darken-4">
+          <v-alert text type="info" color="info-background">
             <template #prepend>
               <v-icon color="info" left> mdi-information-outline </v-icon>
             </template>
             <UiText
               label="For demo purposes, we are using a URL token"
               size="sm"
+              class="info-text--text"
             />
           </v-alert>
         </v-col>
@@ -23,7 +24,7 @@
           <UiText
             tag="h3"
             label="Click on the URL and change password"
-            variant="caption"
+            variant="secondary"
           />
 
           <a target="_blank" :href="href" @click="modelSync = false">{{

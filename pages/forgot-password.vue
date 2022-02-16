@@ -8,7 +8,7 @@
         <UiText
           tag="h2"
           label="Recover password"
-          variant="title"
+          variant="primary"
           size="lg"
           class="text-center mb-[20px]"
         />
@@ -18,7 +18,7 @@
         <UiText
           tag="h3"
           label="Enter the email associated with your account and we'll send an email with instructions to reset your password."
-          variant="caption"
+          variant="secondary"
           class="mb-[8px]"
         />
       </v-col>
@@ -37,7 +37,6 @@ export default {
   name: 'ForgotPasswordPage',
 
   data: () => ({
-    email: '',
     dialog: false,
     changePasswordLink: '',
   }),
@@ -47,7 +46,8 @@ export default {
   },
 
   methods: {
-    async resetPassword() {
+    async resetPassword(email) {
+      // TODO: make api call
       this.changePasswordLink =
         'http://localhost:2022/change-password?token=1441307151_4492f25946a2e8e1414a8bb53dab8a6ba1cf4615'
 

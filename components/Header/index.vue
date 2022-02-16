@@ -2,7 +2,7 @@
   <v-app-bar app elevate-on-scroll elevation="2" color="primary" height="80">
     <v-container class="flex items-center">
       <h1 v-ripple class="rounded">
-        <NuxtLink to="/" class="text-white flex items-center">
+        <NuxtLink to="/" class="white--text flex items-center">
           <Logo class="mr-[13px] text-mdlg" />
           petson.
         </NuxtLink>
@@ -16,17 +16,17 @@
             v-if="!item.to"
             :key="item.title"
             role="button"
-            class="uppercase text-white inline-block rounded"
+            class="uppercase white--text inline-block rounded"
           >
             {{ item.title }}
-            <VIcon class="text-white">{{ item.icon }}</VIcon>
+            <VIcon class="white--text">{{ item.icon }}</VIcon>
           </div>
 
           <NuxtLink
             v-else
             :key="`${item.title}-link`"
             :to="item.to"
-            class="uppercase text-white inline-block rounded"
+            class="uppercase white--text inline-block rounded"
           >
             {{ item.title }}
           </NuxtLink>

@@ -54,7 +54,7 @@ export default {
       default: undefined,
       validator: (prop) => {
         if (typeof prop === 'string') {
-          return ['title', 'body', 'caption', 'disabled'].includes(
+          return ['primary', 'secondary', 'disabled', 'hint'].includes(
             trimmedLowerCase(prop)
           )
         }
@@ -98,15 +98,13 @@ export default {
     variantClass() {
       if (!this.variant) return ''
 
-      switch (trimmedLowerCase(this.variant)) {
-        case 'title':
-          return 'text-black'
-        case 'caption':
-          return 'text-[rgba(0,0,0,0.54)]'
-        case 'disabled':
-          return 'text-gray-300'
+      const variant = trimmedLowerCase(this.variant)
+
+      switch (variant) {
+        case 'hint':
+          return 'text-disabled--text'
         default:
-          return 'text-gray-700'
+          return `text-${variant}--text`
       }
     },
 

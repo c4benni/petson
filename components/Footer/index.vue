@@ -2,7 +2,7 @@
   <v-footer
     absolute
     app
-    color="primary lighten-5"
+    color="primary-50"
     class="h-300"
     aria-label="Footer. Quick links and actions"
   >
@@ -31,7 +31,7 @@
             tag="h2"
             size="mdlg"
             :weight="500"
-            variant="title"
+            variant="primary"
             :label="item.title"
             class="mb-[4px]"
           />
@@ -44,7 +44,7 @@
                   to: link.to,
                 }"
                 :href="link.to === 'default' ? undefined : link.to"
-                variant="caption"
+                variant="secondary"
                 :label="link.title"
               />
             </li>
@@ -54,7 +54,7 @@
         <v-col tag="section">
           <h2 class="opacity-0 select-none mb-4">Customer service</h2>
 
-          <UiText variant="caption" class="mb-0">
+          <UiText variant="secondary" class="mb-0">
             If you can't find answer to your question, please contact our
             <NuxtLink to="#"> customer service </NuxtLink>
           </UiText>
