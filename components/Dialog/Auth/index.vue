@@ -36,10 +36,13 @@
 </template>
 
 <script>
+import { queryModal } from '~/components/mixins/routeQueryModal'
 const validForms = ['log-in', 'sign-up']
 
 export default {
   name: 'AuthDialog',
+
+  mixins: [queryModal],
 
   data: () => ({
     currentForm: '',
@@ -53,9 +56,6 @@ export default {
   },
 
   computed: {
-    modalQuery() {
-      return this.$route.query.modal
-    },
     modelSync: {
       get() {
         if (typeof this.modalQuery === 'string') {
@@ -84,13 +84,6 @@ export default {
           setModal(val)
         }
       },
-    },
-
-    transition() {
-      if (this.modelSync) {
-        return 'slide-y-transition'
-      }
-      return 'slide-y-reverse-transition'
     },
   },
 
