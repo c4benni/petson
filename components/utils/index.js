@@ -9,7 +9,7 @@ export const requiredStringProp = requiredProp(String)
 
 export const undefinedProp = (type) => ({
     type,
-    required: true,
+    undefined: true,
 })
 
 export const undefinedStringProp = undefinedProp(String)
