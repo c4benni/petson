@@ -2,7 +2,7 @@
   <v-form>
     <v-row>
       <v-col cols="12">
-        <TextFieldPassword v-model="password" label="New password" />
+        <TextFieldPassword v-model="password" label="New password" autofocus />
       </v-col>
 
       <v-col cols="12">
