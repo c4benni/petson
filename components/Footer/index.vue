@@ -22,42 +22,48 @@
         </v-col>
 
         <v-col
-          v-for="item in menuItems"
-          :key="item.title"
-          tag="section"
+          v-for="(item, i) in menuItems"
+          :key="item[0]"
           class="flex-grow-0 min-w-fit"
         >
-          <UiText
-            tag="h2"
-            size="mdlg"
-            :weight="500"
-            variant="primary"
-            :label="item.title"
-            class="mb-[4px]"
-          />
+          <AnimateInView :delay="`${(i + 1) * 50}ms`" appear-from="opacity-0">
+            <UiText
+              tag="h2"
+              size="mdlg"
+              :weight="500"
+              variant="primary"
+              :label="item[0]"
+              class="mb-[4px]"
+            />
 
-          <ul class="p-0">
-            <li v-for="link in item.links" :key="link.title" class="mb-[4px]">
-              <UiText
-                :tag="link.type === 'default' ? 'NuxtLink' : 'a'"
-                :props="{
-                  to: link.to,
-                }"
-                :href="link.to === 'default' ? undefined : link.to"
-                variant="secondary"
-                :label="link.title"
-              />
-            </li>
-          </ul>
+            <ul class="p-0">
+              <li v-for="link in item[1]" :key="link.title" class="mb-[4px]">
+                <UiText
+                  :tag="link.type === 'default' ? 'NuxtLink' : 'a'"
+                  :props="{
+                    to: link.to,
+                  }"
+                  :href="link.to === 'default' ? undefined : link.to"
+                  variant="secondary"
+                  :label="link.title"
+                />
+              </li>
+            </ul>
+          </AnimateInView>
         </v-col>
 
-        <v-col tag="section">
-          <h2 class="opacity-0 select-none mb-4">Customer service</h2>
+        <v-col>
+          <AnimateInView
+            :delay="`${(menuItems.length + 1) * 50}ms`"
+            appear-from="opacity-0"
+          >
+            <h2 class="opacity-0 select-none mb-4">Customer service</h2>
 
-          <UiText variant="secondary" class="mb-0">
-            If you can't find answer to your question, please contact our
-            <NuxtLink to="#"> customer service </NuxtLink>
-          </UiText>
+            <UiText variant="secondary" class="mb-0">
+              If you can't find answer to your question, please contact our
+              <NuxtLink to="#"> customer service </NuxtLink>
+            </UiText>
+          </AnimateInView>
         </v-col>
       </v-row>
     </v-container>
