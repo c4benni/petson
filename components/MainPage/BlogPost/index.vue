@@ -31,7 +31,11 @@
 </template>
 
 <script>
-import { requiredProp, requiredStringProp } from '~/components/utils'
+import {
+  requiredProp,
+  requiredStringProp,
+  trimmedLowerCase,
+} from '~/components/utils'
 
 export default {
   name: 'MainPageBlogPost',
@@ -39,6 +43,7 @@ export default {
     imagePosition: {
       type: String,
       default: 'left',
+      validator: (prop) => ['left', 'right'].includes(trimmedLowerCase(prop)),
     },
     title: requiredStringProp,
     action: requiredProp(Object),
