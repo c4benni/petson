@@ -22,8 +22,8 @@
         </v-col>
 
         <v-col
-          v-for="(item, i) in menuItems"
-          :key="item[0]"
+          v-for="([title, links], i) in menuItems"
+          :key="title"
           class="flex-grow-0 min-w-fit"
         >
           <AnimateInView :delay="`${(i + 1) * 50}ms`" appear-from="opacity-0">
@@ -32,12 +32,12 @@
               size="mdlg"
               :weight="500"
               variant="primary"
-              :label="item[0]"
+              :label="title"
               class="mb-[4px]"
             />
 
             <ul class="p-0">
-              <li v-for="link in item[1]" :key="link.title" class="mb-[4px]">
+              <li v-for="link in links" :key="link.title" class="mb-[4px]">
                 <UiText
                   :tag="link.type === 'default' ? 'NuxtLink' : 'a'"
                   :props="{
