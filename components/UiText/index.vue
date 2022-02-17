@@ -17,7 +17,7 @@ export default {
       type: String,
       default: 'div',
     },
-    primary: Boolean,
+    title: Boolean,
     props: {
       type: Object,
       default: () => ({}),
@@ -129,7 +129,7 @@ export default {
         props: { ...this.props },
         on: { ...this.$listeners },
         class: [
-          this.variant === 'title' && this.primary
+          this.title
             ? 'font-light primary--text text-4xl'
             : [this.sizeClass, this.weightClass, this.variantClass],
           this.lineClampClasses,
