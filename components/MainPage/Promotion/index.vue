@@ -13,6 +13,14 @@
     </NuxtLink>
 
     <v-slide-group show-arrows>
+      <template #prev>
+        <MainPagePromotionPaddle left />
+      </template>
+
+      <template #next>
+        <MainPagePromotionPaddle />
+      </template>
+
       <v-slide-item v-for="(item, i) in items" :key="item.title">
         <ProductCard
           :to="item.to"
