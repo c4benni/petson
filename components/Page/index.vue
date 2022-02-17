@@ -1,5 +1,5 @@
 <template functional>
-  <v-container class="h-[calc(100vh-80px)]">
+  <v-container fluid class="min-h-[calc(100vh-80px)] max-w-[1328px]">
     <slot />
   </v-container>
 </template>
