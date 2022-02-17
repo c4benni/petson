@@ -1,6 +1,6 @@
 <template>
   <v-app-bar app elevate-on-scroll elevation="2" color="primary" height="80">
-    <v-container class="flex items-center">
+    <v-container class="flex items-center max-w-[1520px]">
       <h1 v-ripple class="rounded">
         <NuxtLink to="/" class="white--text flex items-center">
           <Logo class="mr-[13px] text-mdlg" />
