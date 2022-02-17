@@ -16,7 +16,7 @@
 
           <v-btn
             :to="props.action.to"
-            elevation="0"
+            depressed
             color="primary"
             nuxt
             class="text-decoration-underline h-[40px] px-[13px] py-[4px] normal-case text-mdlg"

@@ -39,7 +39,7 @@
       <v-btn
         v-if="props.showshowAddToCart"
         class="mt-[10px] h-[30px]"
-        elevation="0"
+        depressed
         color="primary"
       >
         <v-icon left> mdi-cart </v-icon>
