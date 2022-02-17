@@ -54,7 +54,7 @@ export default {
       default: undefined,
       validator: (prop) => {
         if (typeof prop === 'string') {
-          return ['primary', 'secondary', 'disabled', 'hint'].includes(
+          return ['black', 'primary', 'secondary', 'disabled', 'hint'].includes(
             trimmedLowerCase(prop)
           )
         }
@@ -103,6 +103,8 @@ export default {
       switch (variant) {
         case 'hint':
           return 'text-disabled--text'
+        case 'black':
+          return 'black--text'
         default:
           return `text-${variant}--text`
       }
