@@ -27,9 +27,7 @@
             variant="secondary"
           />
 
-          <a target="_blank" :href="href" @click="modelSync = false">{{
-            href
-          }}</a>
+          <NuxtLink :to="href">{{ href }}</NuxtLink>
         </v-col>
       </v-row>
     </v-container>
