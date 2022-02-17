@@ -99,6 +99,9 @@ module.exports = {
     colors: {
         current: 'currentColor',
         inherit: 'inherit',
+
+        // last resort to make global rgba colors as Vuetify doesn't recognize rgba. Great.
+        disabled: 'rgba(0, 0, 0, 0.26)',
     },
     borderRadius: {
         none: '0px',
