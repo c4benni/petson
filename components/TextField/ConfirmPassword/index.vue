@@ -19,8 +19,10 @@ export default {
 
   computed: {
     selfRules() {
-      console.log(3)
-      return [(v) => v === this.password || 'Passwords must match']
+      return [
+        ...this.rules,
+        (v) => v === this.password || 'Passwords must match',
+      ]
     },
   },
 }
