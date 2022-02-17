@@ -1,4 +1,5 @@
 <script>
+import { undefinedStringProp } from '../utils'
 // utility component for a simple Animate on Scroll behavior
 
 export default {
@@ -13,14 +14,17 @@ export default {
     // transition definitions. same as appear-active-class in <Transition/>
     appearActive: {
       type: String,
-      default: 'transition-[transform,opacity] duration-[700ms] transform-gpu',
+      default: 'transition-opacity duration-[700ms] transform-gpu',
     },
 
     // same as appear-class in <Transition/>
     appearFrom: {
       type: String,
-      default: 'translate-y-48 opacity-0',
+      default: 'opacity-0',
     },
+
+    // transition-delay
+    delay: undefinedStringProp,
   },
 
   data: () => ({
@@ -61,6 +65,9 @@ export default {
                 [this.appearFrom]: !this.intersected,
               },
             ],
+            style: {
+              transitionDelay: this.delay,
+            },
           },
           [this.$slots.default]
         ),
