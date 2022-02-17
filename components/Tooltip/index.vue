@@ -1,17 +1,17 @@
 <script>
+import { requiredStringProp, trimmedLowerCase } from '../utils'
 // Helper component to create a universal tooltip that must contain a `label` prop;
 
 export default {
   name: 'Tooltip',
   functional: true,
   props: {
-    label: {
-      type: String,
-      required: true,
-    },
+    label: requiredStringProp,
     position: {
       type: String,
       default: 'bottom',
+      validator: (prop) =>
+        ['top', 'right', 'bottom', 'left'].includes(trimmedLowerCase(prop)),
     },
   },
   render(h, c) {
