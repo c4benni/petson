@@ -40,7 +40,7 @@ export default {
     appearProps() {
       return {
         appear: true,
-        appearClass: 'opacity-0 translate-x-8',
+        appearClass: 'opacity-0 translate-x-12',
         appearActiveClass:
           'delay-[16ms] transition-[opacity,transform] will-change-transform duration-[350ms]',
       }
