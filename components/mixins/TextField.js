@@ -2,7 +2,7 @@ import modelSync from './modelSync'
 export default {
     mixins: [
         modelSync({
-            type: String,
+            type: [String, Number],
             default: '',
         }),
     ],
