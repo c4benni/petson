@@ -11,7 +11,8 @@
         <UiText
           tag="span"
           :label="title"
-          :variant="disabled ? 'primary' : 'secondary'"
+          :opacity="disabled ? 'primary' : 'secondary'"
+          class="pointer-events-none"
         />
       </v-breadcrumbs-item>
     </template>

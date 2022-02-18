@@ -3,14 +3,8 @@
     <v-card
       v-ripple
       tag="figure"
-      class="rounded-[6px] inline-block transition-shadow relative"
-      :class="[
-        data.class,
-        {
-          'px-[34px] pt-[40px] pb-[30px]': !props.showAddToCart,
-          'p-[40px]': props.showAddToCart,
-        },
-      ]"
+      class="rounded-[6px] inline-block transition-shadow relative px-[34px] pt-[40px] pb-[30px] isolate"
+      :class="[data.class]"
       :style="data.style"
       :elevation="hover ? 1 : 0"
       v-bind="data.attrs"
@@ -20,27 +14,32 @@
 
       <UiText
         tag="h3"
-        variant="primary"
-        size="mdlg"
-        class="text-inherit text-decoration-underline"
+        variant="custom"
+        underline
+        class="text-inherit text-20"
         :label="props.title"
       />
 
-      <UiText tag="figcaption" :label="props.caption" variant="secondary" />
+      <UiText
+        tag="figcaption"
+        variant="subtitle-1"
+        opacity="secondary"
+        :label="props.caption"
+      />
 
       <UiText
         tag="h4"
         :label="`${props.weight} kn`"
-        variant="primary"
-        size="mdlg"
+        variant="h6"
         :weight="500"
       />
 
       <v-btn
-        v-if="props.showshowAddToCart"
-        class="mt-[10px] h-[30px]"
+        v-if="props.showAddToCart"
+        class="mt-[10px] h-[30px] z-1"
         depressed
         color="primary"
+        @click.stop
       >
         <v-icon left> mdi-cart </v-icon>
 
@@ -48,7 +47,6 @@
       </v-btn>
 
       <NuxtLink
-        v-else
         :aria-label="props.title"
         :to="props.to"
         class="absolute inset-0"
@@ -67,7 +65,7 @@ export default {
     title: requiredStringProp,
     caption: requiredStringProp,
     weight: requiredProp(Number),
-    showshowAddToCart: Boolean,
+    showAddToCart: Boolean,
   },
 }
 </script>

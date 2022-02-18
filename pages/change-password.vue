@@ -8,8 +8,7 @@
         <UiText
           tag="h2"
           label="Change password"
-          variant="primary"
-          size="lg"
+          variant="h5"
           class="text-center mb-[20px]"
         />
       </v-col>
@@ -18,7 +17,7 @@
         <UiText
           tag="h3"
           label="Your new password must be different from previous passwords."
-          variant="secondary"
+          opacity="secondary"
           class="mb-[8px]"
         />
       </v-col>

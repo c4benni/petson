@@ -19,7 +19,7 @@
             depressed
             color="primary"
             nuxt
-            class="text-decoration-underline h-[40px] px-[13px] py-[4px] normal-case text-mdlg"
+            class="text-decoration-underline h-[40px] px-[13px] py-[4px] normal-case text-20"
             tile
           >
             {{ props.action.title }}

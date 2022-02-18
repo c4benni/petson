@@ -23,76 +23,18 @@ module.exports = {
         sans: ['Roboto', 'sans-serif'],
     },
     fontSize: {
-        xxs: [
-            '12px',
-            {
-                lineHeight: '19.92px',
-            },
-        ],
-        xs: [
+        13: [
             '13px',
             {
                 lineHeight: '17.94px',
                 letterSpacing: '0.15px',
             },
         ],
-        sm: [
-            '14px',
-            {
-                lineHeight: '20px',
-                letterSpacing: '0.15px',
-            },
-        ],
-        base: [
-            '16px',
-            {
-                lineHeight: '24px',
-                letterSpacing: '0.15px',
-            },
-        ],
-        md: [
-            '18px',
-            {
-                lineHeight: '28px',
-            },
-        ],
-        mdlg: [
+        20: [
             '20px',
             {
                 lineHeight: '32px',
                 letterSpacing: '0.15px',
-            },
-        ],
-        lg: [
-            '24px',
-            {
-                lineHeight: '32px',
-            },
-        ],
-        xl: [
-            '30px',
-            {
-                lineHeight: '38px',
-            },
-        ],
-        '2xl': [
-            '36px',
-            {
-                lineHeight: '44px',
-                letterSpacing: '-2%',
-            },
-        ],
-        '3xl': [
-            '48px',
-            {
-                lineHeight: '56px',
-            },
-        ],
-        '4xl': [
-            '60px',
-            {
-                lineHeight: '60px',
-                letterSpacing: '-0.5px',
             },
         ],
     },

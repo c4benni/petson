@@ -4,9 +4,6 @@
       <UiText
         tag="h2"
         :label="title"
-        size="4xl"
-        :weight="300"
-        :line-clamp="1"
         title
         class="primary--text mb-[30px] ml-[52px]"
       />

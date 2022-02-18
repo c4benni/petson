@@ -1,6 +1,12 @@
 <template>
   <v-chip :color="getColor" small>
-    <UiText tag="span" size="xs" class="white--text" :label="getTitle" />
+    <UiText
+      tag="span"
+      variant="custom"
+      opacity="custom"
+      class="white--text text-13"
+      :label="getTitle"
+    />
   </v-chip>
 </template>
 

@@ -16,9 +16,14 @@
           tag="section"
           cols="4"
         >
-          <UiText tag="h3" :label="infoTitle" variant="secondary" size="xxs" />
+          <UiText
+            tag="h3"
+            opacity="secondary"
+            variant="caption"
+            :label="infoTitle"
+          />
 
-          <UiText tag="h4" :label="infoBody" variant="primary" />
+          <UiText tag="h4" :label="infoBody" />
         </v-col>
       </v-row>
     </v-col>

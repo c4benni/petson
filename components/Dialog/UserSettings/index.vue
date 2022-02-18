@@ -12,8 +12,8 @@
               id="dialog-title"
               tag="h2"
               label="User settings"
-              variant="primary"
-              size="lg"
+              opacity="primary"
+              variant="h5"
               class="text-center mb-[44px] mt-[-24px]"
             />
           </v-col>

@@ -3,21 +3,18 @@
     absolute
     app
     color="primary-50"
-    class="h-300"
+    class="min-h-[300px]"
     aria-label="Footer. Quick links and actions"
   >
-    <v-container>
+    <v-container class="max-w-[1200px]">
       <v-row class="space-x-72">
         <v-col class="flex-grow-0 min-w-fit">
-          <UiText
-            tag="h2"
-            :weight="500"
-            class="primary--text inline-grid justify-items-center relative"
-            size="mdlg"
-          >
-            <Logo :width="55.07" :height="52.39" />
-            petson.
-            <NuxtLink to="/" title="Home page" class="absolute inset-0" />
+          <UiText tag="h2" class="inline-grid justify-items-center relative">
+            <span class="primary--text">
+              <Logo :width="55.07" :height="52.39" />
+              petson.
+              <NuxtLink to="/" title="Home page" class="absolute inset-0" />
+            </span>
           </UiText>
         </v-col>
 
@@ -29,9 +26,8 @@
           <AnimateInView :delay="`${(i + 1) * 50}ms`" appear-from="opacity-0">
             <UiText
               tag="h2"
-              size="mdlg"
-              :weight="500"
-              variant="primary"
+              variant="h6"
+              opacity="primary"
               :label="title"
               class="mb-[4px]"
             />
@@ -44,7 +40,8 @@
                     to: link.to,
                   }"
                   :href="link.to === 'default' ? undefined : link.to"
-                  variant="secondary"
+                  opacity="secondary"
+                  variant="subtitle-1"
                   :label="link.title"
                 />
               </li>
@@ -57,9 +54,11 @@
             :delay="`${(menuItems.length + 1) * 50}ms`"
             appear-from="opacity-0"
           >
-            <h2 class="opacity-0 select-none mb-4">Customer service</h2>
+            <h2 class="opacity-0 select-none mb-4 pointer-events-none">
+              Customer service
+            </h2>
 
-            <UiText variant="secondary" class="mb-0">
+            <UiText opacity="secondary" class="mb-0">
               If you can't find answer to your question, please contact our
               <NuxtLink to="#"> customer service </NuxtLink>
             </UiText>

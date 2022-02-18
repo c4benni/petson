@@ -14,7 +14,7 @@
             </template>
             <UiText
               label="For demo purposes, we are using a URL token"
-              size="sm"
+              variant="body-2"
               class="info-text--text"
             />
           </v-alert>
@@ -24,7 +24,7 @@
           <UiText
             tag="h3"
             label="Click on the URL and change password"
-            variant="secondary"
+            opacity="secondary"
           />
 
           <NuxtLink :to="href">{{ href }}</NuxtLink>

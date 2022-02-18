@@ -10,14 +10,13 @@
     <template #top>
       <UiText
         tag="h3"
-        variant="primary"
         label="Latest Orders"
         class="pt-[14px] pl-[20px] pb-[8px]"
       />
     </template>
 
     <template #item.uuid="{ item }">
-      <UiText :label="item.uuid" variant="secondary" size="sm" />
+      <UiText :label="item.uuid" opacity="secondary" variant="body-2" />
     </template>
 
     <template #item.status="{ item }">

@@ -1,1 +1,0 @@
-export const stringAndNumber = (prop) => isFinite(parseFloat(`${prop}`))

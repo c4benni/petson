@@ -12,7 +12,12 @@
             class="w-92 h-92 rounded-full primary white--text grid mb-[24px] justify-items-center gap-y-4 content-center"
           >
             <Logo height="42.41" width="46.98" />
-            <UiText tag="span" label="petson." size="xs" />
+            <UiText
+              tag="span"
+              variant="body-2"
+              opacity="custom"
+              label="petson."
+            />
           </div>
         </v-col>
 
@@ -21,8 +26,8 @@
             id="dialog-title"
             tag="h2"
             :label="title"
-            variant="primary"
-            size="lg"
+            opacity="primary"
+            variant="h5"
             class="text-center mb-[24px]"
           />
         </v-col>

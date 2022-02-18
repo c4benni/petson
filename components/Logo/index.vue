@@ -16,20 +16,18 @@
 </template>
 
 <script>
-import { stringAndNumber } from '@/components/utils/propValidator'
-
 export default {
   name: 'Logo',
   props: {
     width: {
       type: [Number, String],
       default: 31,
-      validator: stringAndNumber,
+      validator: isFinite,
     },
     height: {
       type: [Number, String],
       default: 29,
-      validator: stringAndNumber,
+      validator: isFinite,
     },
   },
 }

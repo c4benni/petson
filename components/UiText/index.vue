@@ -9,111 +9,91 @@ export default {
   name: 'UiText',
 
   props: {
+    title: Boolean,
+
+    underline: Boolean,
+
+    truncate: Boolean,
+
     label: {
       type: String,
       default: undefined,
     },
+
     tag: {
       type: String,
       default: 'div',
     },
-    title: Boolean,
+
     props: {
       type: Object,
       default: () => ({}),
     },
-    lineClamp: {
-      type: Number,
-      default: undefined,
-      validator: (prop) => prop > 0 && prop < 4,
-    },
-    size: {
-      type: String,
-      default: 'md',
-      validator: (prop) =>
-        [
-          'xxs',
-          'xs',
-          'sm',
-          'md',
-          'mdlg',
-          'lg',
-          'xl',
-          '2xl',
-          '4xl',
-          'custom',
-        ].includes(trimmedLowerCase(prop)),
-    },
-    weight: {
-      type: Number,
-      default: 400,
-      validator: (prop) => [200, 300, 400, 500, 600].includes(prop),
-    },
+
     variant: {
       type: String,
-      default: undefined,
-      validator: (prop) => {
-        if (typeof prop === 'string') {
-          return ['black', 'primary', 'secondary', 'disabled', 'hint'].includes(
-            trimmedLowerCase(prop)
-          )
-        }
-        return true
-      },
+      default: 'body-1',
+      validator: (prop) =>
+        /^(?:h[1-6]|subtitle-[1-2]|body-[1-2]|button|caption|overline|custom)$/i.test(
+          prop
+        ),
+    },
+
+    opacity: {
+      type: String,
+      default: 'primary',
+      validator: (prop) =>
+        /^(?:black|primary|secondary|disabled|hint|custom)$/i.test(prop),
+    },
+
+    case: {
+      type: String,
+      default: 'custom',
+      validator: (prop) => /^(?:upper|lower|capitalize|custom)$/.test(prop),
     },
   },
 
   computed: {
-    // the tailwind class to be applied based on the `size` prop;
-    // returns md size if size not given or passed a wrong prop value;
-    sizeClass() {
-      switch (trimmedLowerCase(this.size)) {
-        case 'custom':
-          return ''
-        case 'md':
-          return 'text-base'
-        default:
-          return `text-${this.size}`
-      }
-    },
-
-    // the tailwind class to be applied based on the `weight` prop;
-    // defaults to 400;
-    weightClass() {
-      switch (this.weight) {
-        case 200:
-          return 'font-extralight'
-        case 300:
-          return 'font-light'
-        case 500:
-          return 'font-medium'
-        case 600:
-          return 'font-semibold'
-        default:
-          return 'font-normal'
-      }
-    },
-
-    // returns different text-color based on variant
+    // returns material design typography classes based on `variant` prop value.
     variantClass() {
       if (!this.variant) return ''
 
       const variant = trimmedLowerCase(this.variant)
 
-      switch (variant) {
+      if (variant === 'custom') return ''
+
+      return `text-${variant}`
+    },
+
+    caseFormat() {
+      const format = trimmedLowerCase(this.case)
+
+      if (format === 'custom') return 'text-none'
+
+      switch (format) {
+        case 'capitalize':
+          return `text-${format}`
+        default:
+          return `text-${format}case`
+      }
+    },
+
+    // returns different text-color based on opacity
+    opacityClass() {
+      if (!this.opacity) return ''
+
+      const opacity = trimmedLowerCase(this.opacity)
+
+      if (opacity === 'custom') return ''
+
+      switch (opacity) {
         case 'hint':
           return 'text-disabled--text'
         case 'black':
           return 'black--text'
         default:
-          return `text-${variant}--text`
+          return `text-${opacity}--text`
       }
-    },
-
-    lineClampClasses() {
-      if (!this.lineClamp) return ''
-
-      return `line-clamp-${this.lineClamp}`
     },
   },
 
@@ -132,9 +112,12 @@ export default {
         on: { ...this.$listeners },
         class: [
           this.title
-            ? 'font-light primary--text text-4xl'
-            : [this.sizeClass, this.weightClass, this.variantClass],
-          this.lineClampClasses,
+            ? 'text-h2 primary--text'
+            : [this.variantClass, this.caseFormat, this.opacityClass],
+          {
+            'text-decoration-underline': this.underline,
+            truncate: this.truncate,
+          },
         ],
       },
       [content]

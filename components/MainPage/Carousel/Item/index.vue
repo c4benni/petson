@@ -4,17 +4,17 @@
       <div class="grid gap-y-7 align-start items-start justify-start">
         <UiText
           tag="h2"
+          variant="h2"
           :label="props.title"
-          size="4xl"
-          :weight="300"
+          opacity="custom"
           class="bg-disabled inline-block w-fit pt-[12px] pb-[9px] pr-[16px] pl-[13px] white--text"
         />
 
         <UiText
           tag="h3"
+          variant="h6"
           :label="props.subtitle"
-          size="mdlg"
-          :weight="500"
+          opacity="custom"
           class="bg-disabled inline-block w-fit py-[4px] pl-[13px] pr-[8px] white--text"
         />
       </div>
