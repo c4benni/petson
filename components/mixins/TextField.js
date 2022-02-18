@@ -1,3 +1,4 @@
+import { undefinedProp } from '../utils'
 import modelSync from './modelSync'
 export default {
     mixins: [
@@ -14,5 +15,7 @@ export default {
             type: Array,
             default: () => [],
         },
+        min: undefinedProp([String, Number]),
+        max: undefinedProp([String, Number]),
     },
 }
