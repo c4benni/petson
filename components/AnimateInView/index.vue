@@ -14,7 +14,7 @@ export default {
     // transition definitions. same as appear-active-class in <Transition/>
     appearActive: {
       type: String,
-      default: 'transition-opacity duration-[700ms] transform-gpu',
+      default: 'transition-[opacity,transform] duration-[700ms]',
     },
 
     // same as appear-class in <Transition/>
