@@ -1,7 +1,6 @@
 <template>
   <BaseTextField
     v-model="modelSync"
-    class="Search"
     prepend-inner-icon="mdi-magnify"
     clearable
     :label="placeholder"
@@ -16,16 +15,16 @@ export default {
   props: {
     placeholder: {
       type: String,
-      default: 'Search',
+      default: 'Search products',
     },
   },
 }
 </script>
 
 <style scoped>
-.Search >>> fieldset,
-.Search >>> .v-icon,
-.Search >>> .v-label {
+.v-input >>> fieldset,
+.v-input >>> .v-icon,
+.v-input >>> .v-label {
   color: var(--v-primary-base) !important;
 }
 </style>
