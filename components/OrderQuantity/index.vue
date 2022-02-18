@@ -84,6 +84,7 @@ export default {
   height: 100% !important;
   width: 100% !important;
   padding: 0 !important;
+  min-height: 100% !important;
 }
 
 .v-input >>> input {
