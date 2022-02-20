@@ -15,5 +15,7 @@ export default {
     // set the rows per page and update local storage
     SET_ORDERS_ROWS_PER_PAGE(state, payload) {
         state.latestOrdersRowsPerPage = payload
+
+        localStorage.setItem('latestOrdersRowsPerPage', payload)
     },
 }
