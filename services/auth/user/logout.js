@@ -8,7 +8,7 @@ export default async function logout() {
         this.$axios.setHeader('Authorization', '')
 
         // clear token cookie;
-        setCookie('token', 'null', 0)
+        setCookie('token', '')
 
         return successResponse(res)
     } catch (err) {

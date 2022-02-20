@@ -22,13 +22,18 @@ export default {
     async logout({ commit }) {
         const app = getApp.call(this)
 
-        const { error, data } = await logout.call(app)
+        const { error } = await logout.call(app)
 
         commit('SET_INFO', null)
 
+        if (error) {
+            return { error }
+        }
+
+        await app.$notify.open('Logged out!', 3000)
+
         return {
-            error,
-            data,
+            data: 1,
         }
     },
 

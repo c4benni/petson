@@ -2,6 +2,10 @@ import { camelCase } from 'lodash'
 
 export default {
     SET_INFO(state, info) {
+        if (!info) {
+            return (state.info = null)
+        }
+
         const userInfo = {}
 
         // convert snake_case to camelCase
