@@ -1,5 +1,7 @@
 import vuetifyConfig from './vuetify.config'
 
+const PORT = 2022
+
 const description =
     'Pseudo pet store. Get all your faux pet food and toys in a few clicks.'
 
@@ -21,7 +23,7 @@ export default {
     css: ['@assets/css/main.css'],
 
     // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-    plugins: [],
+    plugins: ['~/plugins/init'],
 
     // Auto import components: https://go.nuxtjs.dev/config-components
     components: [{ path: '~/components', extensions: ['vue'] }],
@@ -44,8 +46,24 @@ export default {
         '@nuxtjs/pwa',
     ],
 
-    // Axios module configuration: https://go.nuxtjs.dev/config-axios
-    axios: {},
+    axios: {
+        baseURL: process.env.API_BASE_URL,
+    },
+
+    publicRuntimeConfig: {
+        axios: {
+            baseURL: process.env.API_BASE_URL,
+            https: true,
+            retry: true,
+            credentials: true,
+            debug: process.env.NODE_ENV === 'development',
+            headers: {
+                common: {
+                    Accept: 'application/json, text/plain, */*',
+                },
+            },
+        },
+    },
 
     // PWA module configuration: https://go.nuxtjs.dev/pwa
     pwa: {
@@ -68,7 +86,7 @@ export default {
     },
 
     server: {
-        port: 2022,
+        port: PORT,
         host: '0.0.0.0',
     },
 }
