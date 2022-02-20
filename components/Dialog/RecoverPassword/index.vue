@@ -15,6 +15,7 @@
             <UiText
               label="For demo purposes, we are using a URL token"
               variant="body-2"
+              opacity="custom"
               class="info-text--text"
             />
           </v-alert>
@@ -27,7 +28,7 @@
             opacity="secondary"
           />
 
-          <NuxtLink :to="href">{{ href }}</NuxtLink>
+          <NuxtLink :to="token.link">{{ token.title }}</NuxtLink>
         </v-col>
       </v-row>
     </v-container>
@@ -36,14 +37,14 @@
 
 <script>
 import modelSync from '~/components/mixins/modelSync'
-import { requiredStringProp } from '~/components/utils'
+import { requiredProp } from '~/components/utils'
 
 export default {
   name: 'RecoverPasswordDialog',
   mixins: [modelSync(Boolean)],
 
   props: {
-    href: requiredStringProp,
+    token: requiredProp(Object),
   },
 }
 </script>

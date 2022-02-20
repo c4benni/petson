@@ -1,5 +1,12 @@
 <template>
-  <FormAuth checkbox-label="Remember me" action-text="Log in">
+  <FormAuth
+    checkbox-label="Remember me"
+    action-text="Log in"
+    :loading="loading"
+    :error="error"
+    @on-submit="submit"
+    @clear-error="error = null"
+  >
     <BaseTextField
       v-model="email"
       label="Email Address *"
@@ -19,19 +26,43 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { modalQuery } from '@/components/utils'
+
+import auth from '@/components/mixins/auth'
 
 export default {
   name: 'LoginForm',
 
-  data: () => ({
-    email: '',
-    password: '',
-  }),
+  mixins: [auth],
 
   computed: {
     signUpRoute() {
       return modalQuery.call(this, 'sign-up')
+    },
+  },
+
+  methods: {
+    ...mapActions({
+      login: 'user/login',
+    }),
+
+    // called in auth mixin's submit method
+    onSuccess() {
+      // close login dialog by calling modalQuery without a modal value
+      this.$router.replace(modalQuery.call(this))
+    },
+
+    async apiCall(remember) {
+      const { email, password } = this
+
+      const { error, data } = await this.login({
+        email,
+        password,
+        remember,
+      })
+
+      return { error, data }
     },
   },
 }

@@ -1,5 +1,7 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
+  <v-form ref="form" v-model="valid" lazy-validation :disabled="loading">
+    <FormAlert :error="error" />
+
     <slot />
 
     <div
@@ -12,7 +14,7 @@
       </label>
     </div>
 
-    <v-btn depressed color="primary" block @click="submit">
+    <v-btn depressed color="primary" block :loading="loading" @click="submit">
       {{ actionText }}
     </v-btn>
 
@@ -23,14 +25,19 @@
 </template>
 
 <script>
-import { requiredStringProp } from '@/components/utils'
+import { requiredStringProp, undefinedProp } from '@/components/utils'
 
 export default {
   name: 'AuthFormWrapper',
+
   props: {
     checkboxLabel: requiredStringProp,
     actionText: requiredStringProp,
+    loading: Boolean,
+    error: undefinedProp(Object),
   },
+
+  emits: ['clear-error', 'on-submit'],
 
   data: () => ({
     valid: true,
@@ -60,11 +67,10 @@ export default {
       }
     },
 
-    resetForm(val) {
-      if (val && ['log-in', 'sign-up'].includes(val)) {
-        // v-form reset to clear warnings and previous input on focus;
-        this.$refs.form?.reset()
-      }
+    resetForm() {
+      this.$refs.form?.reset()
+
+      this.$emit('clear-error')
     },
   },
 }

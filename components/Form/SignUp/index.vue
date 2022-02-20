@@ -2,6 +2,10 @@
   <FormAuth
     checkbox-label="I want to recieve inspiration, marketing promotions and updates via email."
     action-text="Sign up"
+    :loading="loading"
+    :error="error"
+    @on-submit="submit"
+    @clear-error="error = null"
   >
     <v-row>
       <v-col>
@@ -38,22 +42,68 @@
 </template>
 
 <script>
+import auth from '~/components/mixins/auth'
 import { modalQuery } from '~/components/utils'
+import signUp from '~/services/auth/user/signUp'
 
 export default {
   name: 'SignUpForm',
 
+  mixins: [auth],
+
   data: () => ({
     firstName: '',
     lastName: '',
-    email: '',
-    password: '',
     confirmPassword: '',
   }),
 
   computed: {
     logInRoute() {
       return modalQuery.call(this, 'log-in')
+    },
+  },
+
+  methods: {
+    // called in auth mixin's submit method
+    onSuccess() {
+      // switch forms and show log in form.
+      this.$router.replace(modalQuery.call(this, 'log-in'))
+    },
+
+    // called in auth mixin's submit method
+    onError() {
+      // clear password fields;
+
+      this.password = ''
+
+      this.confirmPassword = ''
+    },
+
+    async apiCall(isMarketing) {
+      const { firstName, lastName, email, password, confirmPassword } = this
+
+      const { error } = await signUp.call(this, {
+        firstName,
+        lastName,
+        email,
+        password,
+        confirmPassword,
+        isMarketing,
+      })
+
+      if (error) {
+        return {
+          error,
+          data: null,
+        }
+      }
+
+      return {
+        error: null,
+        data: {
+          message: `Account successfully created! Login.`,
+        },
+      }
     },
   },
 }

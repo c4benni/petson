@@ -23,21 +23,30 @@
       </v-col>
 
       <v-col cols="12">
-        <FormRecoverPassword @on-submit="resetPassword" />
+        <FormAlert :error="error" />
+
+        <FormRecoverPassword :loading="loading" @on-submit="resetPassword" />
       </v-col>
     </v-row>
 
-    <DialogRecoverPassword v-model="dialog" :href="changePasswordLink" />
+    <DialogRecoverPassword v-model="dialog" :token="changePasswordLink" />
   </Page>
 </template>
 
 <script>
+import forgotPassword from '~/services/auth/user/forgotPassword'
+
 export default {
   name: 'ForgotPasswordPage',
 
   data: () => ({
     dialog: false,
-    changePasswordLink: '',
+    changePasswordLink: {
+      title: '',
+      link: '',
+    },
+    error: null,
+    loading: false,
   }),
 
   head: {
@@ -45,14 +54,41 @@ export default {
   },
 
   methods: {
-    async resetPassword(email) {
-      // TODO: make api call
-      this.changePasswordLink =
-        '/change-password?token=1441307151_4492f25946a2e8e1414a8bb53dab8a6ba1cf4615'
+    async resetPassword({ email }) {
+      this.loading = true
+
+      this.error = null
 
       await this.$nextTick()
 
-      this.dialog = true
+      const { data, error } = await forgotPassword.call(this, { email })
+
+      this.error = error
+
+      if (error) {
+        if (error) {
+          scrollTo({
+            left: 0,
+            top: 0,
+            behavior: 'smooth',
+          })
+        }
+      }
+
+      if (data && data.reset_token) {
+        const shortLink = `/change-password?token=${data.reset_token}`
+
+        this.changePasswordLink = {
+          title: `${location.origin}${shortLink}`,
+          link: `${shortLink}&email=${email}`,
+        }
+
+        await this.$nextTick()
+
+        this.dialog = true
+      }
+
+      this.loading = false
     },
   },
 }
