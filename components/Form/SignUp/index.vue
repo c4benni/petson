@@ -79,7 +79,7 @@ export default {
       this.confirmPassword = ''
     },
 
-    async apiCall(isMarketing) {
+    async apiCall({ checkbox }) {
       const { firstName, lastName, email, password, confirmPassword } = this
 
       const { error } = await signUp.call(this, {
@@ -88,7 +88,7 @@ export default {
         email,
         password,
         confirmPassword,
-        isMarketing,
+        isMarketing: checkbox,
       })
 
       if (error) {

@@ -53,13 +53,13 @@ export default {
       this.$router.replace(modalQuery.call(this))
     },
 
-    async apiCall(remember) {
+    async apiCall({ checkbox }) {
       const { email, password } = this
 
       const { error, data } = await this.login({
         email,
         password,
-        remember,
+        remember: checkbox,
       })
 
       return { error, data }
