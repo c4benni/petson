@@ -1,3 +1,4 @@
+import { capitalize } from 'lodash'
 import { faker } from '@faker-js/faker'
 import { errorResponse, successResponse, throwUncaughtError } from '../../utils'
 
@@ -20,8 +21,8 @@ export default async function signUp(credentials) {
 
         try {
             const res = await this.$axios.$post('user/create', {
-                first_name: firstName,
-                last_name: lastName,
+                first_name: capitalize(firstName),
+                last_name: capitalize(lastName),
                 email,
                 password,
                 password_confirmation: confirmPassword,
