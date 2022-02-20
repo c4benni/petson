@@ -14,7 +14,7 @@
 
     <LazyDialogUserSettings />
 
-    <Snackbar />
+    <LazySnackbar />
   </v-app>
 </template>
 
