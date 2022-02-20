@@ -19,26 +19,40 @@
 
         <v-col cols="12" class="mt-[84px] mb-[126px]">
           <AnimateInView>
-            <v-btn block large class="h-[48px]" elevation="2" color="primary">
+            <v-btn
+              block
+              large
+              class="h-[48px]"
+              elevation="2"
+              color="primary"
+              @click="checkout"
+            >
               Proceed to checkout
             </v-btn>
           </AnimateInView>
         </v-col>
       </v-row>
     </v-container>
+
+    <!-- pseudo loader -->
+    <OverlayLoader :show="loading" />
   </Page>
 </template>
 
 <script>
+let loadingTimeout
+
 export default {
   name: 'ProductPage',
 
   data: () => ({
     search: '',
     breadcrumbs: [
-      { title: 'Homepage', to: '/1' },
-      { title: 'Your cart', to: '/2', disabled: true },
+      { title: 'Homepage', to: '/' },
+      { title: 'Your cart', to: '/cart', disabled: true },
     ],
+
+    loading: false,
   }),
 
   head() {
@@ -52,7 +66,29 @@ export default {
       return `Cart`
     },
   },
+
+  beforeDestroy() {
+    clearTimeout(loadingTimeout)
+  },
+
+  methods: {
+    checkout() {
+      this.loading = true
+
+      loadingTimeout = setTimeout(() => {
+        this.loading = false
+
+        if (this.$route.name === 'cart') {
+          window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth',
+          })
+        }
+
+        clearTimeout(loadingTimeout)
+      }, 3000)
+    },
+  },
 }
 </script>
-
-<style></style>
