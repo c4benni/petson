@@ -9,6 +9,12 @@
     right
   >
     {{ snackbar.message }}
+
+    <template #action="{ attrs }">
+      <v-btn color="red" text v-bind="attrs" @click="modelSync = false">
+        Close
+      </v-btn>
+    </template>
   </v-snackbar>
 </template>
 
@@ -27,8 +33,8 @@ export default {
       },
 
       // setter can only be called for a `close` event
-      set() {
-        this.$notify.close()
+      set(val) {
+        !val && this.$notify.close()
       },
     },
   },
