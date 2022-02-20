@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <Header />
 
     <v-main>
@@ -11,7 +11,10 @@
     <Footer />
 
     <LazyDialogAuth />
+
     <LazyDialogUserSettings />
+
+    <Snackbar />
   </v-app>
 </template>
 
