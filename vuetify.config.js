@@ -20,6 +20,7 @@ export default {
 
                 'primary-50': '#EDF5F1',
                 primary: '#4EC690',
+                'primary-darken-1': '#0065A8',
                 'primary-800': '#00A669',
                 'primary-900': '#008655',
                 'primary-border': '#3ec186',
