@@ -22,7 +22,7 @@ export default function init({ store, $axios }) {
     const token = getCookie('token')
 
     if (token) {
-        $axios.setHeader('Authorization', token)
+        $axios.setHeader('Authorization', `Bearer ${token}`)
 
         store.dispatch('user/getInfo')
     }
