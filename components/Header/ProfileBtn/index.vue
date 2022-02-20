@@ -8,41 +8,20 @@
       </HeaderActionBtn>
 
       <Tooltip label="Settings">
-        <v-avatar
+        <Avatar
           v-ripple
-          color="primary-background"
           size="48"
-          aria-label="avatar"
+          :to="userSetting"
+          variant="h6"
           class="ml-[22px] cursor-pointer border border-[#fff]"
-        >
-          <UiText
-            v-if="!info.avatar"
-            tag="NuxtLink"
-            :props="{
-              to: userSetting,
-            }"
-            variant="h6"
-            opacity="secondary"
-            :label="initials"
-            class="w-full h-full flex justify-center items-center"
-          />
-
-          <v-img
-            v-else
-            width="48"
-            height="48"
-            class="rounded"
-            :src="info.avatar"
-            alt="avatar"
-          />
-        </v-avatar>
+        />
       </Tooltip>
     </div>
   </v-fade-transition>
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { modalQuery } from '~/components/utils'
 
 export default {
@@ -52,7 +31,6 @@ export default {
 
   computed: {
     ...mapState('user', ['info']),
-    ...mapGetters('user', ['initials']),
 
     showLogin() {
       return modalQuery.call(this, 'log-in')
