@@ -24,7 +24,7 @@ export default async function login(credentials) {
                 this.$axios.setHeader('Authorization', `Bearer ${token}`)
             }
 
-            // add token to cookie so user can be automatically logged in when app mounts;
+            // add token to cookie so user can be automatically logged in when app mounts if the remember checkbox is checked;
             setCookie('token', token, remember ? 36000 : 0)
 
             return successResponse(res)

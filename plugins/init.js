@@ -1,10 +1,10 @@
 import Vue from 'vue'
 
 import smoothscroll from 'smoothscroll-polyfill'
-import { getCookie } from '~/services/utils'
+import { getCookie, setCookie } from '~/services/utils'
 
 // initialize app; Add any configuration that should take place before app is mounted.
-export default function init({ store, $axios }) {
+export default async function init({ store, $axios }) {
     // init smoothscroll polyfill
     smoothscroll.polyfill()
 
@@ -24,6 +24,15 @@ export default function init({ store, $axios }) {
     if (token) {
         $axios.setHeader('Authorization', `Bearer ${token}`)
 
-        store.dispatch('user/getInfo')
+        // try to update the user/info state.
+        // if it fails, clear cookies and Bearer token
+        const { error } = await store.dispatch('user/getInfo')
+
+        if (error) {
+            console.log(error)
+            setCookie('Token', '')
+
+            $axios.setHeader('Authorization', '')
+        }
     }
 }
