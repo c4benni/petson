@@ -1,6 +1,6 @@
 import { errorResponse, successResponse } from '../utils'
 
-export default async function userOrders(query) {
+export default async function userOrders(query = {}) {
     const { page = 1, limit = 5, sortBy = 'uuid', desc = false } = query
 
     try {
