@@ -19,25 +19,29 @@
     </template>
 
     <template #item.uuid="{ item }">
-      <UiText
-        v-if="latestOrder.key"
-        :key="latestOrder.key"
-        :label="item.uuid"
-        opacity="secondary"
-        variant="body-2"
-      />
-
-      <Skeleton v-else class="h-[20px] w-[180px] rounded-full grey-300" />
+      <Skeleton
+        :loading="latestOrder.key"
+        class="h-[20px] w-[180px] rounded-full grey-300"
+      >
+        <UiText
+          :key="latestOrder.key"
+          :label="item.uuid"
+          opacity="secondary"
+          variant="body-2"
+        />
+      </Skeleton>
     </template>
 
     <template #item.status="{ item }">
-      <UserSettingsDataTableChip
-        v-if="latestOrder.key"
-        :key="latestOrder.key"
-        :status="item.status"
-      />
-
-      <Skeleton v-else class="h-[24px] w-[56px] rounded-full grey-300" />
+      <Skeleton
+        :loading="latestOrder.key"
+        class="h-[24px] w-[56px] rounded-full grey-300"
+      >
+        <UserSettingsDataTableChip
+          :key="latestOrder.key"
+          :status="item.status"
+        />
+      </Skeleton>
     </template>
 
     <template #item.invoice>
