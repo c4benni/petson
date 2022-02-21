@@ -10,6 +10,9 @@ export default async function logout() {
         // clear token cookie;
         setCookie('token', '')
 
+        // clear latest order row page count;
+        localStorage.removeItem('latestOrdersRowsPerPage')
+
         return successResponse(res)
     } catch (err) {
         return errorResponse(err)
