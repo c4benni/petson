@@ -6,5 +6,12 @@ export default function state() {
 
         // rows per page in user-settings;
         latestOrdersRowsPerPage: 5,
+
+        // user-settings latest orders;
+        // `key` will be updated anytime there's a mutation on this object.
+        latestOrder: {
+            key: null,
+            items: [],
+        },
     }
 }

@@ -10,4 +10,25 @@ export default {
 
         return ''
     },
+
+    userSettings(state) {
+        const { info } = state
+
+        if (info) {
+            const dateJoined = `${new Date(info.createdAt)
+        .toLocaleDateString()
+        .replace(/\//g, '. ')}.`
+
+            return {
+                Name: `${info.firstName} ${info.lastName}`,
+                'Phone number': info.phoneNumber,
+                Address: info.address,
+                'Date joined': dateJoined,
+                Email: info.email,
+                'Marketing preference': info.isMarketing ? 'Yes' : 'No',
+            }
+        }
+
+        return {}
+    },
 }
