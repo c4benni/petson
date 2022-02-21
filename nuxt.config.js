@@ -63,6 +63,7 @@ export default {
                 },
             },
         },
+        getFile: process.env.GET_MEDIA,
     },
 
     // PWA module configuration: https://go.nuxtjs.dev/pwa
