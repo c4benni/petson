@@ -2,11 +2,14 @@
   <!-- eslint-disable vue/valid-v-slot -->
 
   <v-data-table
-    :headers="headers"
-    :items="orders"
-    :items-per-page="5"
-    class="elevation-1 data-table-root"
+    class="elevation-1"
+    v-bind="tableProps"
+    @update:items-per-page="setItemsPerPage"
   >
+    <template v-if="!ordersLength" #body>
+      <UserSettingsDataTableEmpty :loading="loading" @on-refresh="getOrders" />
+    </template>
+
     <template #top>
       <UiText
         tag="h3"
@@ -16,15 +19,34 @@
     </template>
 
     <template #item.uuid="{ item }">
-      <UiText :label="item.uuid" opacity="secondary" variant="body-2" />
+      <UiText
+        v-if="latestOrder.key"
+        :key="latestOrder.key"
+        :label="item.uuid"
+        opacity="secondary"
+        variant="body-2"
+      />
+
+      <Skeleton v-else class="h-[20px] w-[180px] rounded-full grey-300" />
     </template>
 
     <template #item.status="{ item }">
-      <UserSettingsDataTableChip :status="item.status" />
+      <UserSettingsDataTableChip
+        v-if="latestOrder.key"
+        :key="latestOrder.key"
+        :status="item.status"
+      />
+
+      <Skeleton v-else class="h-[24px] w-[56px] rounded-full grey-300" />
     </template>
 
     <template #item.invoice>
-      <v-btn icon tile class="rounded grey-300 text-secondary--text mr-[12px]">
+      <v-btn
+        icon
+        tile
+        disabled
+        class="rounded grey-300 text-secondary--text mr-[12px]"
+      >
         <v-icon>mdi-tray-arrow-down</v-icon>
       </v-btn>
     </template>
@@ -32,37 +54,67 @@
 </template>
 
 <script>
-const headers = [
-  {
-    text: 'Order UUID',
-    value: 'uuid',
-    class: 'pl-[28px]',
-    cellClass: 'pl-[28px] text',
-  },
-  { text: 'Status', value: 'status' },
-  {
-    text: 'Download Invoice',
-    value: 'invoice',
-    align: 'right',
-    sortable: false,
-  },
-]
-
-const orders = [
-  { uuid: '083d0036-9616-3f1e-9b03-4fe51ad2e1c2', status: 'open' },
-  { uuid: '083d0036-9616-3f1e-9b03-4fe51ad2e1c2', status: 'pending' },
-  { uuid: '083d0036-9616-3f1e-9b03-4fe51ad2e1c2', status: 'paid' },
-  { uuid: '083d0036-9616-3f1e-9b03-4fe51ad2e1c2', status: 'shipped' },
-  { uuid: '083d0036-9616-3f1e-9b03-4fe51ad2e1c2', status: 'cancelled' },
-]
+import { mapState, mapActions } from 'vuex'
+import { headers } from './utils'
 
 export default {
+  name: 'UserSettingsDataTable',
+
   data: () => ({
     headers,
-    orders,
   }),
 
+  async fetch() {
+    const { error, data } = await this.getOrders()
+  },
+
+  computed: {
+    ...mapState('user', ['latestOrdersRowsPerPage', 'latestOrder']),
+
+    ordersLength() {
+      if (this.loading) return 0
+      return this.latestOrder.items.length
+    },
+
+    // v-data-table props
+    tableProps() {
+      return {
+        headers: this.headers,
+        items: this.orders,
+        itemsPerPage: this.latestOrdersRowsPerPage,
+        serverItemsLength: this.loading ? 0 : this.ordersLength,
+        loading: this.loading ? 'info' : false,
+        disablePagination: this.loading,
+        disableItemsPerPage: this.loading,
+        itemsPerPageOptions: this.itemsPerPageOptions,
+        disableSort: !!(this.loading || !this.ordersLength),
+      }
+    },
+
+    // table is fetching data for the first;
+    loading() {
+      return !this.latestOrder.key
+    },
+
+    orders() {
+      return this.latestOrder.items
+    },
+
+    // return items to be shown in the rows-per-page select dropdown.
+    // the last item that shows as all will show the length of user/latestOrders[]
+    // also, the return value will only contain numbers that are less than user/latestOrdersRowsPerPage
+    itemsPerPageOptions() {
+      const lastLength = this.latestOrder.items.length || 0
+
+      return [5, 10, 15, lastLength].filter(
+        (item) => item >= this.latestOrdersRowsPerPage
+      )
+    },
+  },
+
   methods: {
+    ...mapActions('user', ['getOrders']),
+
     getStatusColor(status) {
       const statusColor = {
         shipped: 'green',
@@ -73,30 +125,34 @@ export default {
       }
       return statusColor[status]
     },
+
+    setItemsPerPage(count) {
+      this.$store.commit('user/SET_ORDERS_ROWS_PER_PAGE', count)
+    },
   },
 }
 </script>
 
 <style scoped>
-#__nuxt .data-table-root >>> th,
-#__nuxt .data-table-root >>> td,
-#__nuxt .data-table-root >>> .v-data-footer {
+#__nuxt .v-data-table >>> th,
+#__nuxt .v-data-table >>> td,
+#__nuxt .v-data-table >>> .v-data-footer {
   border-color: rgba(0, 0, 0, 0.08);
 }
 
-#__nuxt .data-table-root >>> th:not(:hover) {
+#__nuxt .v-data-table >>> th:not(:hover) {
   color: var(--v-text-secondary-base);
 }
 
-#__nuxt .data-table-root >>> .v-data-table-header th:last-of-type {
+#__nuxt .v-data-table >>> .v-data-table-header th:last-of-type {
   padding-right: 0;
 }
 
-#__nuxt .data-table-root >>> .v-data-table__wrapper {
+#__nuxt .v-data-table >>> .v-data-table__wrapper {
   padding: 0 30px;
 }
 
-#__nuxt .data-table-root >>> .v-data-footer {
+#__nuxt .v-data-table >>> .v-data-footer {
   color: var(--v-grey-base);
 }
 </style>
