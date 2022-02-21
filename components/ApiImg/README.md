@@ -1,4 +1,4 @@
-## <ApiIMG/>
+# ApiIMG
 
 For fetching petson images alone.
 

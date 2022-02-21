@@ -1,4 +1,4 @@
-# <MainPageCarousel/>
+# MainPageCarousel
 
 Shows promotions.
 
