@@ -9,6 +9,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    color: {
+      type: String,
+      default: 'grey-300',
+    },
   },
 
   render(h, c) {
@@ -23,6 +27,7 @@ export default {
             'aria-live': 'polite',
             ...data.attrs,
           },
+          staticClass: props.color,
           class: [data.staticClass, data.class],
         })
       : c.children[0]

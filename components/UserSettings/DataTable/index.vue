@@ -21,7 +21,7 @@
     <template #item.uuid="{ item }">
       <Skeleton
         :loading="latestOrder.key"
-        class="h-[20px] w-[180px] rounded-full grey-300"
+        class="h-[20px] w-[180px] rounded-full"
       >
         <UiText
           :key="latestOrder.key"
@@ -35,7 +35,7 @@
     <template #item.status="{ item }">
       <Skeleton
         :loading="latestOrder.key"
-        class="h-[24px] w-[56px] rounded-full grey-300"
+        class="h-[24px] w-[56px] rounded-full"
       >
         <UserSettingsDataTableChip
           :key="latestOrder.key"
