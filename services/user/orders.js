@@ -1,7 +1,12 @@
 import { errorResponse, successResponse } from '../utils'
 
-export default async function userOrders(query = {}) {
-    const { page = 1, limit = 5, sortBy = 'uuid', desc = false } = query
+export default async function userOrders() {
+    const {
+        page = 1,
+            limit = 5,
+            sortBy = 'uuid',
+            desc = false,
+    } = this.$route.query
 
     try {
         const res = await this.$axios.$get('user/orders', {
