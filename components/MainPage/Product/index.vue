@@ -1,21 +1,23 @@
 <template>
   <AnimateInView>
-    <NuxtLink :to="to">
-      <UiText
-        tag="h2"
-        :label="title"
-        title
-        class="primary--text mb-[30px] ml-[52px]"
-      />
-    </NuxtLink>
+    <Skeleton :loading="loading">
+      <NuxtLink :to="`/category/${uuid || 'null'}`">
+        <UiText
+          tag="h2"
+          :label="title"
+          title
+          class="primary--text mb-[30px] ml-[52px]"
+        />
+      </NuxtLink>
+    </Skeleton>
 
     <v-slide-group show-arrows>
       <template #prev>
-        <MainPagePromotionPaddle left />
+        <MainPageProductPaddle left />
       </template>
 
       <template #next>
-        <MainPagePromotionPaddle />
+        <MainPageProductPaddle />
       </template>
 
       <v-slide-item v-for="(item, i) in items" :key="item.title">
@@ -39,14 +41,19 @@
 </template>
 
 <script>
-import { requiredProp, requiredStringProp } from '~/components/utils'
+import {
+  requiredProp,
+  requiredStringProp,
+  undefinedStringProp,
+} from '~/components/utils'
 
 export default {
-  name: 'MainPagePromotion',
+  name: 'MainPageProduct',
   props: {
     title: requiredStringProp,
-    to: requiredStringProp,
+    uuid: undefinedStringProp,
     items: requiredProp(Array),
+    loading: Boolean,
   },
 }
 </script>
