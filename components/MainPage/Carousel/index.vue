@@ -1,14 +1,19 @@
 <template>
   <MainPageContainer>
-    <v-hover v-slot="{ hover }" :close-delay="750">
+    <v-hover
+      v-slot="{ hover }"
+      :close-delay="750"
+      :disabled="!promotion.length"
+    >
       <Transition v-bind="appearProps">
         <v-carousel
           :interval="10000"
-          cycle
+          :cycle="!hover"
           height="400"
           hide-delimiter-background
-          :hide-delimiters="!hover"
-          show-arrows-on-hover
+          :hide-delimiters="!hover || !promotion.length"
+          :show-arrows-on-hover="!!promotion.length"
+          :show-arrows="!!promotion.length"
           class="touch-manipulation"
         >
           <MainPageCarouselItem
@@ -23,26 +28,33 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'MainPageCarousel',
-  data: () => ({
-    items: Array.from(
-      {
-        length: 4,
-      },
-      (_, i) => ({
-        title: `Up to ${i + 1}0% sale`,
-        subtitle: 'On select dog food and toys',
-      })
-    ),
-  }),
+
   computed: {
+    ...mapState('mainPage', ['key', 'promotion']),
+    items() {
+      if (!this.key) {
+        return [
+          {
+            loading: true,
+            title: '',
+            image: '',
+            content: '',
+          },
+        ]
+      }
+
+      return this.promotion
+    },
     appearProps() {
       return {
         appear: true,
-        appearClass: 'opacity-0 translate-x-12',
+        appearClass: 'opacity-0',
         appearActiveClass:
-          'delay-[16ms] transition-[opacity,transform] will-change-transform duration-[350ms]',
+          'delay-[16ms] transition-[opacity,transform] will-change-transform duration-[400ms]',
       }
     },
   },

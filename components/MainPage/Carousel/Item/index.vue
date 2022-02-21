@@ -1,22 +1,48 @@
 <template functional>
   <v-carousel-item>
-    <v-sheet height="100%" class="px-[40px] py-[32px] primary">
-      <div class="grid gap-y-7 align-start items-start justify-start">
-        <UiText
-          tag="h2"
-          variant="h2"
-          :label="props.title"
-          opacity="custom"
-          class="bg-disabled inline-block w-fit pt-[12px] pb-[9px] pr-[16px] pl-[13px] white--text"
-        />
+    <v-sheet
+      height="100%"
+      class="px-[40px] py-[32px] relative isolate"
+      :class="{ 'primary-background': props.loading }"
+    >
+      <ApiImg
+        v-if="!props.loading"
+        :uuid="props.image"
+        :alt="`${props.title} background image`"
+        eager
+        class="absolute inset-0 rounded-[inherit] w-full h-full"
+      />
 
-        <UiText
-          tag="h3"
-          variant="h6"
-          :label="props.subtitle"
-          opacity="custom"
-          class="bg-disabled inline-block w-fit py-[4px] pl-[13px] pr-[8px] white--text"
-        />
+      <div
+        class="grid gap-y-7 align-start items-start justify-start z-1 relative w-full"
+      >
+        <Skeleton
+          :loading="props.loading"
+          color="bg-disabled"
+          class="w-[350px] h-[81px]"
+        >
+          <UiText
+            tag="h2"
+            variant="h2"
+            :label="props.title"
+            opacity="custom"
+            class="bg-disabled inline-block w-fit pt-[12px] pb-[9px] pr-[16px] pl-[13px] white--text"
+          />
+        </Skeleton>
+
+        <Skeleton
+          color="bg-disabled"
+          :loading="props.loading"
+          class="w-[500px] h-[64px]"
+        >
+          <UiText
+            tag="h3"
+            variant="h6"
+            :label="props.content"
+            opacity="custom"
+            class="bg-disabled inline-block w-fit py-[4px] pl-[13px] pr-[8px] white--text"
+          />
+        </Skeleton>
       </div>
     </v-sheet>
   </v-carousel-item>
@@ -27,8 +53,10 @@ import { requiredStringProp } from '~/components/utils'
 export default {
   name: 'MainPageCarouselItem',
   props: {
+    image: requiredStringProp,
     title: requiredStringProp,
-    subtitle: requiredStringProp,
+    content: requiredStringProp,
+    loading: Boolean,
   },
 }
 </script>
