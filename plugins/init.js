@@ -29,10 +29,21 @@ export default async function init({ store, $axios }) {
         const { error } = await store.dispatch('user/getInfo')
 
         if (error) {
-            console.log(error)
-            setCookie('Token', '')
+            setCookie('token', '')
 
             $axios.setHeader('Authorization', '')
         }
+    }
+
+    // set user/latestOrdersRowsPerPage state from localStorage
+    const latestOrdersRowsPerPage = localStorage.getItem(
+        'latestOrdersRowsPerPage'
+    )
+
+    if (latestOrdersRowsPerPage) {
+        store.commit(
+            'user/SET_ORDERS_ROWS_PER_PAGE',
+            parseInt(latestOrdersRowsPerPage) || 5
+        )
     }
 }
