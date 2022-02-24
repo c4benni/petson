@@ -22,3 +22,19 @@ export function modalQuery(modal) {
         },
     }
 }
+
+// works like this.$nextTick, but the callback gets called after the next animation frame; also, no this is being binded.
+export function nextFrame(callback) {
+    if (typeof callback === 'function') {
+        requestAnimationFrame(callback)
+    } else {
+        return new Promise((resolve) => {
+            requestAnimationFrame(resolve)
+        })
+    }
+}
+
+// quickly build home page. Used in story books, and for testing
+export async function buildMainPage() {
+    await this.$store.dispatch('mainPage/build')
+}
