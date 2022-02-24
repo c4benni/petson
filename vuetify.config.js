@@ -1,6 +1,4 @@
 export default {
-    customVariables: ['~/assets/variables.scss'],
-
     theme: {
         options: {
             themeCache: process.env.NODE_ENV === 'production' ?
