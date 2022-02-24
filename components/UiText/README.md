@@ -1,4 +1,4 @@
-# Tooltip
+# UiText
 
 Easily add typography to any component, layout, or page.
 
