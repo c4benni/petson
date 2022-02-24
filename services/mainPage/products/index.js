@@ -1,4 +1,4 @@
-import { shuffle } from 'lodash'
+import { capitalize, shuffle } from 'lodash'
 import { errorResponse, successResponse } from '~/services/utils'
 
 // Using a more robust method to fetch products because most categories aren't populated, which might make mainPage render empty sections.
@@ -35,13 +35,29 @@ export default async function mainPageProducts() {
         const promiseItem = async(category) => {
             const { title, uuid } = category
 
-            const res = await $fetch({
+            const { data } = await $fetch({
                 category: uuid,
                 limit: 5,
             })
 
+            // get the fields needed
+            const sortedData = data.map((item) => {
+                const { brand, metadata, price, title, uuid } = item
+
+                return {
+                    title,
+                    uuid,
+                    price,
+                    brandTitle: brand.title,
+                    brandUuid: brand.uuid,
+                    image: metadata.image,
+                }
+            })
+
             return {
-                [title]: res,
+                items: sortedData,
+                uuid,
+                title: capitalize(title),
             }
         }
 

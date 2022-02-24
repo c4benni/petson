@@ -2,13 +2,13 @@ import { errorResponse, successResponse } from '~/services/utils'
 
 export default async function mainPagePromotions() {
     try {
-        const res = await this.$axios.$get('/main/promotions')
+        const { data } = await this.$axios.$get('/main/promotions')
 
-        const data = res.data.map((item) => {
+        const sortedRes = data.map((item) => {
             const {
                 title,
                 content,
-                metaData: { image },
+                metadata: { image },
             } = item
 
             return {
@@ -18,7 +18,7 @@ export default async function mainPagePromotions() {
             }
         })
 
-        return successResponse({ data })
+        return successResponse({ data: sortedRes })
     } catch (err) {
         return errorResponse(err)
     }
