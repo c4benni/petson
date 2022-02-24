@@ -1,5 +1,3 @@
-import { modalQuery } from '@/components/utils'
-
 export default {
     data: () => ({
         email: '',
@@ -31,17 +29,13 @@ export default {
 
             await this.$nextTick()
 
-            const { error, data } = await this.apiCall(checkbox)
+            const { error } = await this.apiCall(checkbox)
 
             this.loading = false
 
             this.error = error
 
             if (!error) {
-                await this.$notify.open(data.message, 3000)
-
-                await this.$nextTick()
-
                 this.onSuccess()
             } else {
                 this.onError()
