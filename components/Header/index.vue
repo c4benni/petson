@@ -35,7 +35,7 @@
 
       <v-spacer />
 
-      <HeaderActionBtn class="mr-[24px]">
+      <HeaderActionBtn class="mr-[24px]" to="/cart">
         <v-icon left> mdi-cart </v-icon>
         Cart (0)
       </HeaderActionBtn>

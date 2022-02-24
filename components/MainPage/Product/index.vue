@@ -1,11 +1,12 @@
 <template>
   <AnimateInView>
     <Skeleton :loading="loading">
-      <NuxtLink :to="`/category/${uuid || 'null'}`">
+      <NuxtLink :to="`/categories/${uuid || 'null'}`">
         <UiText
           tag="h2"
           :label="title"
           title
+          line-clamp="1"
           class="primary--text mb-[30px] ml-[52px]"
         />
       </NuxtLink>
@@ -22,10 +23,7 @@
 
       <v-slide-item v-for="(item, i) in items" :key="item.title">
         <ProductCard
-          :to="item.to"
-          :title="item.title"
-          :caption="item.caption"
-          :weight="item.weight"
+          v-bind="item"
           :class="[
             'my-[8px]',
             {
@@ -57,3 +55,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.v-slide-group >>> .v-slide-group__content {
+  flex: auto !important;
+}
+</style>

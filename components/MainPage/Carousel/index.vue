@@ -34,19 +34,8 @@ export default {
   name: 'MainPageCarousel',
 
   computed: {
-    ...mapState('mainPage', ['key', 'promotion']),
+    ...mapState('mainPage', ['promotion']),
     items() {
-      if (!this.key) {
-        return [
-          {
-            loading: true,
-            title: '',
-            image: '',
-            content: '',
-          },
-        ]
-      }
-
       return this.promotion
     },
     appearProps() {

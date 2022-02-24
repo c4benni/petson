@@ -10,13 +10,14 @@
       class="w-full h-full flex justify-center items-center select-none"
     />
 
-    <v-img
+    <ApiImg
       v-else
       :width="size"
       :height="size"
       class="rounded"
       :src="info.avatar"
       alt="User avatar"
+      :uuid="info.avatar"
     />
   </v-avatar>
 </template>

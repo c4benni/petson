@@ -13,7 +13,11 @@
             <span class="primary--text">
               <Logo :width="55.07" :height="52.39" />
               petson.
-              <NuxtLink to="/" title="Home page" class="absolute inset-0" />
+              <NuxtLink
+                to="/"
+                title="Home page"
+                class="absolute inset-0 text-transparent"
+              />
             </span>
           </UiText>
         </v-col>

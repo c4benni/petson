@@ -7,7 +7,7 @@
     <h2 id="dialog-title" class="sr-only">Recovery link</h2>
     <v-container class="mt-[18px] w-[424px] pb-[68px] px-0">
       <v-row>
-        <v-col>
+        <v-col cols="12">
           <v-alert text type="info" color="info-background">
             <template #prepend>
               <v-icon color="info" left> mdi-information-outline </v-icon>

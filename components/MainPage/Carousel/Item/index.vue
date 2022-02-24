@@ -16,33 +16,37 @@
       <div
         class="grid gap-y-7 align-start items-start justify-start z-1 relative w-full"
       >
-        <Skeleton
-          :loading="props.loading"
-          color="bg-disabled"
-          class="w-[350px] h-[81px]"
-        >
-          <UiText
-            tag="h2"
-            variant="h2"
-            :label="props.title"
-            opacity="custom"
-            class="bg-disabled inline-block w-fit pt-[12px] pb-[9px] pr-[16px] pl-[13px] white--text"
-          />
-        </Skeleton>
+        <AnimateInView appear-active="duration-[350ms]">
+          <Skeleton
+            :loading="props.loading"
+            color="bg-disabled"
+            loading-class="w-[350px] h-[81px]"
+          >
+            <UiText
+              tag="h2"
+              variant="h2"
+              :label="props.title"
+              opacity="custom"
+              class="bg-disabled inline-block w-fit pt-[12px] pb-[9px] pr-[16px] pl-[13px] white--text"
+            />
+          </Skeleton>
+        </AnimateInView>
 
-        <Skeleton
-          color="bg-disabled"
-          :loading="props.loading"
-          class="w-[500px] h-[64px]"
-        >
-          <UiText
-            tag="h3"
-            variant="h6"
-            :label="props.content"
-            opacity="custom"
-            class="bg-disabled inline-block w-fit py-[4px] pl-[13px] pr-[8px] white--text"
-          />
-        </Skeleton>
+        <AnimateInView>
+          <Skeleton
+            color="bg-disabled"
+            :loading="props.loading"
+            loading-class="w-[500px] h-[64px]"
+          >
+            <UiText
+              tag="h3"
+              variant="h6"
+              :label="props.content"
+              opacity="custom"
+              class="bg-disabled inline-block w-fit py-[4px] pl-[13px] pr-[8px] white--text"
+            />
+          </Skeleton>
+        </AnimateInView>
       </div>
     </v-sheet>
   </v-carousel-item>

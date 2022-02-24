@@ -1,4 +1,5 @@
 <script>
+import { undefinedStringProp } from '../utils'
 export default {
   name: 'Skeleton',
 
@@ -9,6 +10,7 @@ export default {
       type: Boolean,
       default: true,
     },
+    loadingClass: undefinedStringProp,
     color: {
       type: String,
       default: 'grey-300',
@@ -21,6 +23,7 @@ export default {
 
     return props.loading
       ? h('div', {
+          key: 'root',
           attrs: {
             role: 'alert',
             'aria-busy': 'true',
@@ -28,7 +31,7 @@ export default {
             ...data.attrs,
           },
           staticClass: props.color,
-          class: [data.staticClass, data.class],
+          class: [props.loadingClass],
         })
       : c.children[0]
   },

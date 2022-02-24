@@ -3,7 +3,9 @@
     v-model="modelSync"
     prepend-inner-icon="mdi-magnify"
     clearable
-    :label="placeholder"
+    :label="label"
+    :placeholder="placeholder"
+    v-on="$listeners"
   />
 </template>
 
@@ -13,9 +15,13 @@ import TextField from '~/components/mixins/TextField'
 export default {
   mixins: [TextField],
   props: {
-    placeholder: {
+    label: {
       type: String,
       default: 'Search products',
+    },
+    placeholder: {
+      type: String,
+      default: 'Press enter to search',
     },
   },
 }

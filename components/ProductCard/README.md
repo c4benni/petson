@@ -2,8 +2,45 @@
 
 Renders the product cards that are on the main page, and category page.
 
-## Special prop
+## Syntax
 
-### show-add-to-cart
+```vue
+<!-- regular -->
+<ProductCard v-bind="product" />
+```
 
-Shows the add to cart button
+## Props
+
+### `uuid`
+
+- Type: `String`
+
+- Required: `true`
+
+### `title`
+
+- Type: `String`
+
+- Required: `true`
+
+### `image`
+
+- Type: `String`
+
+- Required: `true`
+
+### `brand-title`
+
+- Type: `String`
+
+- Default: `''`
+
+### `price`
+
+- Type: `Number`
+
+- Required: `true`
+
+### `show-add-to-cart`
+
+- Type: `Boolean`

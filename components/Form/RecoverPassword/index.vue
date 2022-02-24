@@ -27,6 +27,7 @@
 
 <script>
 import recoverPassword from '@/components/mixins/recoverPassword'
+import forgotPassword from '~/services/auth/user/forgotPassword'
 
 export default {
   name: 'RecoverPasswordForm',
@@ -40,6 +41,43 @@ export default {
   computed: {
     submitPayload() {
       return { email: this.email }
+    },
+  },
+
+  methods: {
+    async apiCall({ email }) {
+      this.loading = true
+
+      this.error = null
+
+      await this.$nextTick()
+
+      const { data, error } = await forgotPassword.call(this, { email })
+
+      this.error = error
+
+      if (error) {
+        scrollTo({
+          left: 0,
+          top: 0,
+          behavior: 'smooth',
+        })
+      }
+
+      if (data && data.reset_token) {
+        const shortLink = `/change-password?token=${data.reset_token}`
+
+        this.changePasswordLink = {
+          title: `${location.origin}${shortLink}`,
+          link: `${shortLink}&email=${email}`,
+        }
+
+        await this.$nextTick()
+
+        this.dialog = true
+      }
+
+      this.loading = false
     },
   },
 }

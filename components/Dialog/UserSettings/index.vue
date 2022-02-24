@@ -19,7 +19,7 @@
           </v-col>
 
           <v-col cols="12" class="px-[24px]">
-            <UserSettingsInfo v-bind="info" />
+            <UserSettingsInfo />
           </v-col>
         </v-row>
       </v-container>
@@ -37,28 +37,21 @@ export default {
 
   mixins: [queryModal],
 
-  data: () => ({
-    info: {
-      avatar: '',
-      userInfo: {
-        name: 'John Rollingston',
-        'phone number': '(559) 979-6096',
-        address: '1285 Fallen Pioneer Heights, Dallas, TX',
-        'date joined': '14. 9. 2020.',
-        email: 'j.sharp@hotmail.com',
-        'marketing preference': 'No',
-      },
-    },
-  }),
+  data: () => ({}),
 
   head() {
     return {
-      title:
-        this.$route.query.modal === 'user-settings' ? 'Settings' : undefined,
+      title: this.pageTitle,
     }
   },
 
   computed: {
+    pageTitle() {
+      return this.$route.query.modal === 'user-settings'
+        ? 'Settings'
+        : undefined
+    },
+
     modelSync: {
       get() {
         if (typeof this.modalQuery === 'string') {
@@ -69,11 +62,22 @@ export default {
       },
 
       set(val) {
+        // clear queries when dialog closes
+        const filterQueries = val
+          ? {}
+          : {
+              page: undefined,
+              sortBy: undefined,
+              limit: undefined,
+              desc: undefined,
+            }
+
         const setModal = (modal) =>
           this.$router.push({
             query: {
               ...this.$route.query,
               modal,
+              ...filterQueries,
             },
           })
 

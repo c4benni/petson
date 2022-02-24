@@ -2,9 +2,11 @@
   <MainPageContainer>
     <AnimateInView>
       <div class="flex items-center">
-        <v-img
+        <ApiImg
+          :uuid="props.image"
+          :alt="`${props.title} blog image`"
           :height="400"
-          class="primary"
+          class="flex-shrink-1 min-w-[550px]"
           :class="{
             'mr-[58px]': props.imagePosition === 'left',
             'ml-[58px] order-2': props.imagePosition === 'right',
@@ -15,14 +17,14 @@
           <UiText tag="h2" :label="props.title" title class="mb-[16px]" />
 
           <v-btn
-            :to="props.action.to"
+            :to="`blog/${props.uuid}`"
             depressed
             color="primary"
             nuxt
             class="text-decoration-underline h-[40px] px-[13px] py-[4px] normal-case text-20"
             tile
           >
-            {{ props.action.title }}
+            Read our blog
           </v-btn>
         </div>
       </div>
@@ -31,11 +33,7 @@
 </template>
 
 <script>
-import {
-  requiredProp,
-  requiredStringProp,
-  trimmedLowerCase,
-} from '~/components/utils'
+import { requiredStringProp, trimmedLowerCase } from '~/components/utils'
 
 export default {
   name: 'MainPageBlogPost',
@@ -46,7 +44,8 @@ export default {
       validator: (prop) => ['left', 'right'].includes(trimmedLowerCase(prop)),
     },
     title: requiredStringProp,
-    action: requiredProp(Object),
+    uuid: requiredStringProp,
+    image: requiredStringProp,
   },
 }
 </script>

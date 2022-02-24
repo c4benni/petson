@@ -2,11 +2,12 @@
   <!-- eslint-disable vue/valid-v-slot -->
 
   <v-data-table
+    ref="table"
     class="elevation-1"
     v-bind="tableProps"
-    @update:items-per-page="setItemsPerPage"
+    v-on="tableEvents"
   >
-    <template v-if="!ordersLength" #body>
+    <template v-if="loading || !latestOrderTotal" #body>
       <UserSettingsDataTableEmpty :loading="loading" @on-refresh="getOrders" />
     </template>
 
@@ -19,47 +20,23 @@
     </template>
 
     <template #item.uuid="{ item }">
-      <Skeleton
-        :loading="latestOrder.key"
-        class="h-[20px] w-[180px] rounded-full"
-      >
-        <UiText
-          :key="latestOrder.key"
-          :label="item.uuid"
-          opacity="secondary"
-          variant="body-2"
-        />
-      </Skeleton>
+      <UiText :label="item.uuid" opacity="secondary" variant="body-2" />
     </template>
 
     <template #item.status="{ item }">
-      <Skeleton
-        :loading="latestOrder.key"
-        class="h-[24px] w-[56px] rounded-full"
-      >
-        <UserSettingsDataTableChip
-          :key="latestOrder.key"
-          :status="item.status"
-        />
-      </Skeleton>
+      <UserSettingsDataTableChip :status="item.status" />
     </template>
 
-    <template #item.invoice>
-      <v-btn
-        icon
-        tile
-        disabled
-        class="rounded grey-300 text-secondary--text mr-[12px]"
-      >
-        <v-icon>mdi-tray-arrow-down</v-icon>
-      </v-btn>
+    <template #item.invoice="{ item }">
+      <UserSettingsDataTableInvoice :item="item" />
     </template>
   </v-data-table>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
 import { headers } from './utils'
+import { nextFrame } from '~/components/utils'
 
 export default {
   name: 'UserSettingsDataTable',
@@ -69,69 +46,162 @@ export default {
   }),
 
   async fetch() {
-    const { error, data } = await this.getOrders()
+    await this.getOrders()
   },
 
   computed: {
-    ...mapState('user', ['latestOrdersRowsPerPage', 'latestOrder']),
+    ...mapState('user', ['latestOrder']),
 
-    ordersLength() {
-      if (this.loading) return 0
-      return this.latestOrder.items.length
+    ...mapGetters('user', ['loading', 'latestOrderItems', 'latestOrderTotal']),
+
+    dialogActive() {
+      return this.$route.query.modal === 'user-settings'
     },
 
-    // v-data-table props
+    page: {
+      get() {
+        return parseFloat(this.$route.query.page) || 1
+      },
+      set(val) {
+        if (typeof val === 'string' && this.page !== val) {
+          this.replaceRouteQuery({
+            page: parseFloat(val) || 1,
+          })
+        }
+      },
+    },
+
+    sortBy: {
+      get() {
+        return this.$route.query.sortBy
+      },
+      set(val) {
+        if (typeof val === 'string' && this.sortBy !== val) {
+          // reset desc filter when sortBy changes
+          this.replaceRouteQuery({
+            sortBy: val,
+            desc: 0,
+          })
+        }
+      },
+    },
+
+    desc: {
+      get() {
+        return this.$route.query.desc
+      },
+      set(val) {
+        const desc = val ? 1 : 0
+        if (typeof val === 'boolean' && this.desc !== desc) {
+          this.replaceRouteQuery({
+            desc,
+          })
+        }
+      },
+    },
+
+    limit: {
+      get() {
+        return parseFloat(this.$route.query.limit) || 5
+      },
+      set(val) {
+        const canReplaceRoute =
+          isFinite(val) && this.dialogActive && val !== this.limit
+
+        if (canReplaceRoute) {
+          this.replaceRouteQuery({
+            limit: val,
+          })
+        }
+      },
+    },
+
+    // get filters, so watcher could call this.applyFilters() when any value changes;
+    filters() {
+      return `${this.page}-${this.sortBy}-${this.desc}-${this.limit}`
+    },
+
+    // v-data-table props to avoid clustering template
     tableProps() {
       return {
+        page: this.page,
         headers: this.headers,
-        items: this.orders,
-        itemsPerPage: this.latestOrdersRowsPerPage,
-        serverItemsLength: this.loading ? 0 : this.ordersLength,
+        items: this.latestOrder.items,
+        itemsPerPage: this.limit,
+        serverItemsLength: this.loading ? 0 : this.latestOrderTotal,
         loading: this.loading ? 'info' : false,
         disablePagination: this.loading,
         disableItemsPerPage: this.loading,
-        itemsPerPageOptions: this.itemsPerPageOptions,
-        disableSort: !!(this.loading || !this.ordersLength),
+        itemsPerPageOptions: this.limitOptions,
+        disableSort: !!(this.loading || !this.latestOrderTotal),
       }
     },
 
-    // table is fetching data for the first;
-    loading() {
-      return !this.latestOrder.key
-    },
-
-    orders() {
-      return this.latestOrder.items
+    tableEvents() {
+      return {
+        updateSortBy: (val) => (this.sortBy = val),
+        'update:sort-desc': (val) => (this.desc = val),
+        'update:items-per-page': this.setItemsPerPage,
+        'update:page': this.updatePage,
+      }
     },
 
     // return items to be shown in the rows-per-page select dropdown.
-    // the last item that shows as all will show the length of user/latestOrders[]
-    // also, the return value will only contain numbers that are less than user/latestOrdersRowsPerPage
+    // the last item that shows as `All` will show `getters.latestOrderTotal`
     itemsPerPageOptions() {
       const lastLength = this.latestOrder.items.length || 0
 
-      return [5, 10, 15, lastLength].filter(
-        (item) => item >= this.latestOrdersRowsPerPage
-      )
+      return [5, 10, 15, lastLength].filter((item) => item >= this.limit)
     },
+  },
+
+  watch: {
+    filters: 'applyFilters',
   },
 
   methods: {
     ...mapActions('user', ['getOrders']),
 
-    getStatusColor(status) {
-      const statusColor = {
-        shipped: 'green',
-        paid: 'green',
-        pending: 'orange',
-        open: 'blue',
-        cancelled: 'gray',
-      }
-      return statusColor[status]
+    async replaceRouteQuery(query = {}) {
+      await nextFrame()
+
+      this.$router.replace({
+        query: {
+          ...this.$route.query,
+          ...query,
+        },
+      })
+    },
+
+    async applyFilters() {
+      await nextFrame()
+
+      await this.getOrders(true)
+
+      // scroll dialog to top after filter applies.
+      const table = this.$refs.table
+
+      const dialog = table.$el.closest('.v-dialog')
+
+      dialog.scrollTo({
+        left: 0,
+        top: 0,
+        behavior: 'smooth',
+      })
     },
 
     setItemsPerPage(count) {
-      this.$store.commit('user/SET_ORDERS_ROWS_PER_PAGE', count)
+      if (count > -1) {
+        this.limit = count
+      } else {
+        this.limit = this.latestOrderTotal
+      }
+    },
+
+    updatePage(count) {
+      this.replaceRouteQuery({
+        page: count,
+      })
     },
   },
 }

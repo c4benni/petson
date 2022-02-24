@@ -21,7 +21,7 @@ export default {
       type: String,
       required: true,
       validator: (prop) =>
-        ['open', 'pending', 'paid', 'shipped', 'cancelled'].includes(
+        ['open', 'pending', 'paid', 'shipped', 'canceled'].includes(
           trimmedLowerCase(prop)
         ),
     },
@@ -36,7 +36,7 @@ export default {
         pending: 'secondary',
         paid: 'primary',
         shipped: 'primary-900',
-        cancelled: 'grey-400',
+        canceled: 'grey-400',
       }
 
       return colors[this.trimmedStatus]

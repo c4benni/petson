@@ -1,10 +1,8 @@
 export default {
-    props: {
-        loading: Boolean,
-    },
-
     data: () => ({
         valid: true,
+
+        loading: false,
     }),
 
     methods: {
@@ -18,7 +16,11 @@ export default {
             await this.$nextTick()
 
             if (this.valid) {
-                this.$emit('on-submit', this.submitPayload)
+                this.loading = true
+
+                await this.apiCall('on-submit', this.submitPayload)
+
+                this.loading = false
             }
         },
     },

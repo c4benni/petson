@@ -1,7 +1,31 @@
 # MainPageProduct
 
-Component to display the products slider on the main page.
+Displays product category section on the main page
 
-## Features
+## Syntax
 
-Wrapped in `<AnimateInView/>`
+```vue
+<MainPageProductPaddle />
+```
+
+## Props
+
+### `title`
+
+- Type: `String`
+
+- Required: `true`
+
+### `uuid`
+
+- Type: `String`
+
+### `items`
+
+- Type: `[]`
+
+- Required: `true`
+
+### `loading`
+
+- Type: `Boolean`

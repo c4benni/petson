@@ -51,6 +51,18 @@ export default {
       default: 'custom',
       validator: (prop) => /^(?:upper|lower|capitalize|custom)$/.test(prop),
     },
+
+    lineClamp: {
+      type: [String, Number],
+      default: undefined,
+      validator: (prop) => (prop ? /^[1-3]$/.test(prop) : true),
+    },
+
+    // html attrs to be used
+    attrs: {
+      type: Object,
+      default: () => ({}),
+    },
   },
 
   computed: {
@@ -107,7 +119,8 @@ export default {
     return h(
       this.tag,
       {
-        attrs: { ...this.$attrs },
+        // attrs is the html attributes to be used. Can be used to override the existing `title` prop
+        attrs: { ...this.$attrs, ...this.attrs },
         props: { ...this.props },
         on: { ...this.$listeners },
         class: [
@@ -117,6 +130,7 @@ export default {
           {
             'text-decoration-underline': this.underline,
             truncate: this.truncate,
+            [`line-clamp-${this.lineClamp}`]: this.lineClamp,
           },
         ],
       },

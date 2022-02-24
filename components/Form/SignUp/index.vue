@@ -98,11 +98,10 @@ export default {
         }
       }
 
+      await this.$notify.open(`Account successfully created! Login.`, 3000)
+
       return {
-        error: null,
-        data: {
-          message: `Account successfully created! Login.`,
-        },
+        data: 1,
       }
     },
   },

@@ -1,0 +1,3 @@
+# UserSettingsDataTableChip
+
+Displays user information

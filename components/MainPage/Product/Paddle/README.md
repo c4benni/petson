@@ -1,7 +1,19 @@
 # MainPageProductPaddle
 
-Component to render the paddles (chevron icons) on the products slider.
+Left and Right paddle for the `<v-slide-group/>` found in each product on the main page (`/` route)
 
-## Why?
+## Syntax
 
-To easily add ripple effect, and to decluster `<MainPageProduct/>`
+```vue
+<!-- right paddle -->
+<MainPageProductPaddle />
+
+<!-- left paddle -->
+<MainPageProductPaddle left />
+```
+
+## Props
+
+### `left`
+
+- Type: `Boolean`

@@ -1,7 +1,6 @@
 <template>
   <v-form ref="form" v-model="valid" lazy-validation :disabled="loading">
     <FormAlert :error="error" />
-
     <slot />
 
     <div
@@ -68,9 +67,9 @@ export default {
     },
 
     resetForm() {
-      this.$refs.form?.reset()
-
       this.$emit('clear-error')
+
+      this.$refs.form?.resetValidation?.()
     },
   },
 }

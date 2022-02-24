@@ -1,0 +1,3 @@
+# MainPageCarouselItem
+
+Shows promotions item.

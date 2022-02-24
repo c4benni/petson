@@ -1,6 +1,10 @@
 <template>
   <div class="flex justify-start items-center">
-    <v-img height="300" width="300" class="primary max-w-[300px] mr-[64px]" />
+    <v-img
+      height="300"
+      width="300"
+      class="primary-background max-w-[300px] mr-[64px]"
+    />
 
     <div>
       <NuxtLink to="/">
@@ -33,5 +37,3 @@ export default {
   }),
 }
 </script>
-
-<style></style>
