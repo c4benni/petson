@@ -40,7 +40,7 @@ export default {
         })
     },
 
-    // build mainPage by calling all the above commits;
+    // build mainPage by calling all the above actions;
     async build({ dispatch, commit }) {
         const getSection = async(section) => await dispatch(section)
 
