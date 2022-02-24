@@ -8,71 +8,31 @@
     <div class="space-y-102 mb-[102px]">
       <MainPageCarousel />
 
-      <Component
-        :is="item.tag"
-        v-for="item in promotionAndBlog"
-        :key="item.title"
-        v-bind="item.content"
+      <MainPageProduct v-bind="product[0]" />
+
+      <MainPageBlogPost v-bind="blogPost[0]" />
+
+      <!-- repeat product group if only one category was fetched -->
+      <MainPageProduct v-bind="product[1] || product[0]" />
+
+      <MainPageBlogPost
+        v-if="blogPost[1]"
+        image-position="right"
+        v-bind="blogPost[1]"
       />
     </div>
   </Page>
 </template>
 
 <script>
-const products = Array.from({ length: 5 }, (_, i) => ({
-  title: `Brit care endurance ${i + 1}`,
-  caption: 'Animonda',
-  to: '/',
-  weight: 200,
-}))
-
-const promotion = [
-  {
-    title: 'Dry dog food',
-    to: '#',
-    items: products,
-  },
-  {
-    title: 'Pet treats and chews',
-    to: '#',
-    items: products,
-  },
-]
-
-const blogPost = [
-  {
-    title: 'Treat your pup',
-    action: {
-      to: '/',
-      title: 'Discover our dog treat selection',
-    },
-  },
-  {
-    title: 'Get the best tips',
-    action: {
-      to: '/',
-      title: 'Read our blog',
-    },
-    imagePosition: 'right',
-  },
-]
+import { mapState } from 'vuex'
 
 export default {
   name: 'MainPage',
   data: () => ({ search: '' }),
+
   computed: {
-    promotionAndBlog() {
-      // TODO: get promotions and blog posts from vuex;
-
-      const posts = [promotion[0], blogPost[0], promotion[1], blogPost[1]]
-
-      // set component tag to render each post.
-      // even indexes are MainPageBlogPost while odd ones are MainPagePromotion
-      return posts.map((post, index) => ({
-        content: post,
-        tag: (index + 1) % 2 === 0 ? 'MainPageBlogPost' : 'MainPagePromotion',
-      }))
-    },
+    ...mapState('mainPage', ['key', 'product', 'blogPost']),
   },
 }
 </script>
