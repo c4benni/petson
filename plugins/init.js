@@ -1,14 +1,12 @@
-import Vue from 'vue'
-
 import smoothscroll from 'smoothscroll-polyfill'
 import { getCookie, setCookie } from '~/services/utils'
 
 // initialize app; Add any configuration that should take place before app is mounted.
-export default async function init({ store, $axios }) {
+export default async function init({ store, $axios, redirect, route }, inject) {
     // init smoothscroll polyfill
     smoothscroll.polyfill()
 
-    Vue.prototype.$notify = {
+    const notify = {
         async open(message, timeout) {
             await store.dispatch('app/openSnackbar', message, timeout)
         },
@@ -16,6 +14,8 @@ export default async function init({ store, $axios }) {
             store.dispatch('app/closeSnackbar')
         },
     }
+
+    inject('notify', notify)
 
     // automatic login
     // get cookie, if it exists, set axios header, then dispatch 'user/getInfo'
@@ -35,15 +35,11 @@ export default async function init({ store, $axios }) {
         }
     }
 
-    // set user/latestOrdersRowsPerPage state from localStorage
-    const latestOrdersRowsPerPage = localStorage.getItem(
-        'latestOrdersRowsPerPage'
-    )
-
-    if (latestOrdersRowsPerPage) {
-        store.commit(
-            'user/SET_ORDERS_ROWS_PER_PAGE',
-            parseInt(latestOrdersRowsPerPage) || 5
-        )
-    }
+    // catch all unauthorized requests and send client to login modal;
+    $axios.onError((err) => {
+        if (err.response.status === 401) {
+            // redirect to main page and open login modal.
+            redirect('/?modal=log-in')
+        }
+    })
 }
