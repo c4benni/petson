@@ -90,6 +90,14 @@ export default {
         middleware: 'auth',
     },
 
+    loading: {
+        color: 'var(--v-info-base)',
+    },
+
+    storybook: {
+        decorators: ['<v-app><story/></v-app>'],
+    },
+
     server: {
         port: PORT,
         host: '0.0.0.0',
