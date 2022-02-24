@@ -32,3 +32,25 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background-color: #fff;
 }
+
+.line-clamp-1,
+.line-clamp-2,
+.line-clamp-3 {
+  display: -webkit-box !important;
+  display: -moz-box !important;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  padding-bottom: 2px;
+}
+
+.line-clamp-1 {
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  -webkit-line-clamp: 3;
+}
