@@ -25,11 +25,7 @@
       <v-col cols="12">
         <FormAlert :error="error" />
 
-        <FormChangePassword
-          ref="form"
-          :loading="loading"
-          @on-submit="changePassword"
-        />
+        <FormChangePassword ref="form" @on-submit="changePassword" />
       </v-col>
     </v-row>
   </Page>
