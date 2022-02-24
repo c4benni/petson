@@ -31,4 +31,20 @@ export default {
 
         return {}
     },
+
+    loggedIn(state) {
+        return !!state.info
+    },
+
+    loading(state) {
+        return !state.latestOrder.key
+    },
+
+    latestOrderItems(state) {
+        return state.latestOrder.items
+    },
+
+    latestOrderTotal(state) {
+        return state.latestOrder.total
+    },
 }

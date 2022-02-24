@@ -3,7 +3,7 @@ import login from '~/services/auth/user/login'
 import userInfo from '~/services/user/info'
 import logout from '~/services/auth/user/logout'
 import { modalQuery } from '~/components/utils'
-import userOrders from '@/services/user/orders'
+import userOrders from '~/services/user/orders'
 
 export default {
     // get user info and save it to state.info;
@@ -24,13 +24,9 @@ export default {
     async logout({ commit }) {
         const app = getApp.call(this)
 
-        const { error } = await logout.call(app)
+        await logout.call(app)
 
         commit('SET_INFO', null)
-
-        if (error) {
-            return { error }
-        }
 
         await app.$notify.open('Logged out!', 3000)
 
@@ -57,20 +53,20 @@ export default {
             return { error }
         }
 
+        await app.$notify.open(`Welcome back ${data.first_name}!`, 3000)
+
         return {
-            data: {
-                message: `Welcome back ${data.first_name}!`,
-            },
+            data: 1,
         }
     },
 
     // attempt to get item if user is logged in; else show loggin
-    async getOrders({ commit, state }) {
+    async getOrders({ commit, state, getters }, showLoading) {
         const app = getApp.call(this)
 
-        if (state.info) {
-            // refresh store.state.latestOrder if store.state.latestOrder.items length is 0;
-            !state.latestOrder.items.length && commit('SET_LATEST_ORDER', null)
+        if (getters.loggedIn) {
+            // refresh state.latestOrder so loader can be shown in user-settings dialog
+            showLoading && commit('SET_LATEST_ORDER', null)
 
             const { error, data } = await userOrders.call(app)
 

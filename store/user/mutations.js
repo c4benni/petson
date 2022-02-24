@@ -16,20 +16,17 @@ export default {
         state.info = userInfo
     },
 
-    // set the rows per page and update local storage
-    SET_ORDERS_ROWS_PER_PAGE(state, payload) {
-        state.latestOrdersRowsPerPage = payload
-
-        localStorage.setItem('latestOrdersRowsPerPage', payload)
-    },
-
     // update latestOrder
-    SET_LATEST_ORDER(state, items) {
+    SET_LATEST_ORDER(state, data) {
         // set key to null if items is null. This is to refresh the store state, so <user-settings-data-table/> can show proper loader;
         // if no items ars is passed, that means a get request was made, but the current state of state.latestOrder.items's length is 0
+
+        const { items, total } = data || {}
+
         state.latestOrder = {
             key: items ? `${performance.now()}` : null,
             items: items || [],
+            total,
         }
     },
 }
