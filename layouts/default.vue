@@ -10,7 +10,7 @@
 
     <Footer />
 
-    <LazyDialogAuth />
+    <DialogAuth />
 
     <LazyDialogUserSettings />
 
