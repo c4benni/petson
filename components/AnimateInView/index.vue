@@ -29,7 +29,39 @@ export default {
 
   data: () => ({
     intersected: false,
+
+    itersectionObserver: null,
   }),
+
+  mounted() {
+    this.connect()
+  },
+
+  beforeDestroy() {
+    this.disconnect()
+  },
+
+  methods: {
+    connect() {
+      this.itersectionObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          this.intersected = true
+
+          this.disconnect()
+        }
+      }, {})
+
+      this.itersectionObserver.observe(this.$el)
+    },
+
+    disconnect() {
+      if (this.itersectionObserver) {
+        this.itersectionObserver.unobserve(this.$el)
+        this.itersectionObserver.disconnect()
+        this.itersectionObserver = null
+      }
+    },
+  },
 
   render(h) {
     return h(
@@ -41,19 +73,6 @@ export default {
         on: {
           ...this.$listeners,
         },
-        directives: [
-          {
-            name: 'intersect',
-            modifiers: {
-              once: true,
-            },
-            value: (entries) => {
-              if (entries[0].isIntersecting) {
-                this.intersected = true
-              }
-            },
-          },
-        ],
       },
       [
         h(
