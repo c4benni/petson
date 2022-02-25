@@ -1,7 +1,5 @@
 import vuetifyConfig from './vuetify.config'
 
-const PORT = 2022
-
 const description =
     'Pseudo pet store. Get all your faux pet food and toys in a few clicks.'
 
@@ -15,8 +13,38 @@ export default {
             { name: 'viewport', content: 'width=device-width, initial-scale=1' },
             { hid: 'description', name: 'description', content: description },
             { name: 'format-detection', content: 'telephone=no' },
+            {
+                hid: 'twitter-app-country',
+                property: 'twitter:app:country',
+                content: 'NG',
+            },
+            {
+                hid: 'twitter-site',
+                property: 'twitter:site',
+                content: '@c4benn',
+            },
+            {
+                hid: 'twitter-image',
+                property: 'twitter:image',
+                content: '~static/icon.png',
+            },
+            {
+                hid: 'twitter-card',
+                property: 'twitter:card',
+                content: 'summary_large_image',
+            },
+            {
+                hid: 'twitter-title',
+                property: 'twitter:title',
+                content: description,
+            },
+            {
+                hid: 'twitter-desc',
+                property: 'twitter:description',
+                content: description,
+            },
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+        link: [{ rel: 'icon', type: 'image/x-icon', href: '~static/icon.png' }],
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css
@@ -60,6 +88,7 @@ export default {
             headers: {
                 common: {
                     Accept: 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
                 },
             },
         },
@@ -70,6 +99,25 @@ export default {
     pwa: {
         manifest: {
             lang: 'en',
+            name: 'Petson',
+            shortName: 'Petson',
+            short_name: 'Petson',
+            description,
+            background_color: '#4EC690',
+
+            useWebmanifestExtension: true,
+            start_url: '/?mode=pwa',
+            display: 'standalone',
+            theme_color: '#4EC690',
+            dir: 'ltr',
+            orientation: 'portrait',
+            categories: ['lifestyle', 'finance'],
+        },
+        meta: {
+            author: 'Chidi Benedict',
+            themeColor: '#4EC690',
+            nativeUI: true,
+            mobileAppIOS: true,
         },
     },
 
@@ -87,6 +135,7 @@ export default {
     },
 
     router: {
+        base: '/petson',
         middleware: 'auth',
     },
 
@@ -99,7 +148,7 @@ export default {
     },
 
     server: {
-        port: PORT,
+        port: 2022,
         host: '0.0.0.0',
     },
 }
