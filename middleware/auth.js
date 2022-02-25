@@ -1,4 +1,4 @@
-export default function({ store, redirect, route, req }) {
+export default function({ store, redirect, route }) {
     // redirect modalQueries;
 
     // if there's no session, and client is trying to access ?modal=user-settings, show login.
