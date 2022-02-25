@@ -1,0 +1,61 @@
+{
+  "name": "Petson",
+  "short_name": "Petson",
+  "description": "Pseudo pet store. Get all your faux pet food and toys in a few clicks.",
+  "icons": [
+    {
+      "src": "/petson/_nuxt/icons/icon_64x64.b79fb9.png",
+      "sizes": "64x64",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/petson/_nuxt/icons/icon_120x120.b79fb9.png",
+      "sizes": "120x120",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/petson/_nuxt/icons/icon_144x144.b79fb9.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/petson/_nuxt/icons/icon_152x152.b79fb9.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/petson/_nuxt/icons/icon_192x192.b79fb9.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/petson/_nuxt/icons/icon_384x384.b79fb9.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/petson/_nuxt/icons/icon_512x512.b79fb9.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/?mode=pwa",
+  "display": "standalone",
+  "background_color": "#4EC690",
+  "theme_color": "#4EC690",
+  "lang": "en",
+  "dir": "ltr",
+  "shortName": "Petson",
+  "orientation": "portrait",
+  "categories": [
+    "lifestyle",
+    "finance"
+  ]
+}
