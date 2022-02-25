@@ -1,9 +1,9 @@
-<template functional>
+<template>
   <v-overlay
-    :value="props.show"
+    :value="show"
     color="#000"
     opacity="0.5"
-    v-bind="data.attrs"
+    v-bind="$attrs"
     class="touch-none"
     @wheel.stop.prevent
   >

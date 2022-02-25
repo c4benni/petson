@@ -1,23 +1,23 @@
-<template functional>
+<template>
   <MainPageContainer>
     <AnimateInView>
       <div class="flex items-center">
         <ApiImg
-          :uuid="props.image"
-          :alt="`${props.title} blog image`"
+          :uuid="image"
+          :alt="`${title} blog image`"
           :height="400"
           class="flex-shrink-1 min-w-[550px]"
           :class="{
-            'mr-[58px]': props.imagePosition === 'left',
-            'ml-[58px] order-2': props.imagePosition === 'right',
+            'mr-[58px]': imagePosition === 'left',
+            'ml-[58px] order-2': imagePosition === 'right',
           }"
         />
 
         <div>
-          <UiText tag="h2" :label="props.title" title class="mb-[16px]" />
+          <UiText tag="h2" :label="title" title class="mb-[16px]" />
 
           <v-btn
-            :to="`blog/${props.uuid}`"
+            :to="`blog/${uuid}`"
             depressed
             color="primary"
             nuxt

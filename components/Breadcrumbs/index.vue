@@ -1,5 +1,5 @@
-<template functional>
-  <v-breadcrumbs :items="props.items" class="p-0">
+<template>
+  <v-breadcrumbs :items="items" class="p-0">
     <template #item="{ item: { to, href, disabled, title } }">
       <v-breadcrumbs-item
         :to="to"

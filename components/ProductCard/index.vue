@@ -1,19 +1,17 @@
-<template functional>
+<template>
   <v-hover v-slot="{ hover }">
     <v-card
       v-ripple
       tag="figure"
-      :title="props.title"
+      :title="title"
       class="rounded-[6px] inline-block transition-shadow relative px-[34px] pt-[40px] pb-[30px] isolate w-fit"
-      :class="[data.class]"
-      :style="data.style"
       :elevation="hover ? 1 : 0"
-      v-bind="data.attrs"
-      v-on="data.on"
+      v-bind="$attrs"
+      v-on="$listeners"
     >
       <ApiImg
-        :uuid="props.image"
-        :alt="`${props.title} image`"
+        :uuid="image"
+        :alt="`${title} image`"
         height="220"
         width="220"
         class="mb-[16px]"
@@ -25,7 +23,7 @@
         underline
         line-clamp="1"
         class="text-inherit text-20 max-w-fit"
-        :label="props.title"
+        :label="title"
       />
 
       <UiText
@@ -33,18 +31,13 @@
         variant="subtitle-1"
         line-clamp="1"
         opacity="secondary"
-        :label="props.brandTitle"
+        :label="brandTitle"
       />
 
-      <UiText
-        tag="h4"
-        :label="`${props.price} kn`"
-        variant="h6"
-        :weight="500"
-      />
+      <UiText tag="h4" :label="`${price} kn`" variant="h6" :weight="500" />
 
       <v-btn
-        v-if="props.showAddToCart"
+        v-if="showAddToCart"
         class="mt-[10px] h-[30px] z-1"
         depressed
         color="primary"
@@ -56,8 +49,8 @@
       </v-btn>
 
       <NuxtLink
-        :aria-label="props.title"
-        :to="`/product/${props.uuid}`"
+        :aria-label="title"
+        :to="`/product/${uuid}`"
         class="absolute inset-0 text-transparent"
       />
     </v-card>

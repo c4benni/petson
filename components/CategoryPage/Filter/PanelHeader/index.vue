@@ -1,6 +1,6 @@
-<template functional>
+<template>
   <v-expansion-panel-header class="pb-0">
-    <UiText opacity="black" variant="button" :label="props.label" />
+    <UiText opacity="black" variant="button" :label="label" />
 
     <template #actions>
       <v-icon color="black"> mdi-chevron-down </v-icon>

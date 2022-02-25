@@ -1,6 +1,6 @@
-<template functional>
+<template>
   <div v-ripple class="h-full w-full flex place-content-center relative paddle">
-    <v-icon>{{ `mdi-chevron-${props.left ? 'left' : 'right'}` }}</v-icon>
+    <v-icon>{{ `mdi-chevron-${left ? 'left' : 'right'}` }}</v-icon>
   </div>
 </template>
 

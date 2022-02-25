@@ -1,22 +1,16 @@
-<template functional>
+<template>
   <v-fade-transition>
-    <v-alert
-      v-if="props.error"
-      text
-      type="error"
-      color="error"
-      class="mb-[36px]"
-    >
+    <v-alert v-if="error" text type="error" color="error" class="mb-[36px]">
       <UiText
-        :label="props.error.message"
+        :label="error.message"
         variant="subtitle-1"
         opacity="custom"
         class="error-text--text"
       />
 
-      <template v-if="props.error.errors">
+      <template v-if="error.errors">
         <ul
-          v-for="(messages, errTitle) in props.error.errors"
+          v-for="(messages, errTitle) in error.errors"
           :key="errTitle"
           :aria-label="`${errTitle} error`"
         >

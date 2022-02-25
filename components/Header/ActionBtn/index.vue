@@ -1,17 +1,16 @@
-<template functional>
-  <VBtn
+<template>
+  <v-btn
     outlined
     dark
     large
     class="h-48 py-[8px] px-[22px]"
-    :class="[data.class, data.staticClass]"
-    :nuxt="!!props.to"
-    :to="props.to"
-    v-bind="data.attrs"
-    v-on="data.on"
+    :nuxt="!!to"
+    :to="to"
+    v-bind="$attrs"
+    v-on="$listeners"
   >
     <slot />
-  </VBtn>
+  </v-btn>
 </template>
 
 <script>
