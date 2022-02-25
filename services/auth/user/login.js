@@ -1,9 +1,4 @@
-import {
-    errorResponse,
-    setCookie,
-    successResponse,
-    throwUncaughtError,
-} from '../../utils'
+import { errorResponse, successResponse, throwUncaughtError } from '../../utils'
 
 export default async function login(credentials) {
     if (typeof credentials === 'object') {
@@ -25,7 +20,13 @@ export default async function login(credentials) {
             }
 
             // add token to cookie so user can be automatically logged in when app mounts if the remember checkbox is checked;
-            setCookie('token', token, remember ? 36000 : 0)
+            const oneDay = 60 * 60 * 24
+
+            const maxAge = remember ? oneDay : 0
+
+            this.$cookies.set('token', token, {
+                maxAge,
+            })
 
             return successResponse(res)
         } catch (err) {

@@ -1,4 +1,4 @@
-import { errorResponse, setCookie, successResponse } from '../../utils'
+import { errorResponse, successResponse } from '../../utils'
 
 export default async function logout() {
     try {
@@ -8,7 +8,7 @@ export default async function logout() {
         this.$axios.setHeader('Authorization', '')
 
         // clear token cookie;
-        setCookie('token', '')
+        this.$cookies.remove('token')
 
         // clear latest order row page count;
         localStorage.removeItem('latestOrdersRowsPerPage')
