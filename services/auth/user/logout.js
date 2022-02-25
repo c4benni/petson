@@ -8,7 +8,9 @@ export default async function logout() {
         this.$axios.setHeader('Authorization', '')
 
         // clear token cookie;
-        this.$cookies.remove('token')
+        this.$cookies.set('token', '', {
+            maxAge: 0,
+        })
 
         // clear latest order row page count;
         localStorage.removeItem('latestOrdersRowsPerPage')
