@@ -19,7 +19,7 @@
             class="uppercase white--text inline-block rounded"
           >
             {{ item.title }}
-            <VIcon class="white--text">{{ item.icon }}</VIcon>
+            <v-icon class="white--text">{{ item.icon }}</v-icon>
           </div>
 
           <NuxtLink
