@@ -10,16 +10,16 @@
 
     <Footer />
 
-    <DialogAuth />
+    <LazyDialogUserSettings v-if="loggedIn" />
 
-    <LazyDialogUserSettings />
+    <DialogAuth />
 
     <LazySnackbar />
   </v-app>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import smoothscroll from 'smoothscroll-polyfill'
 
 export default {
@@ -28,6 +28,10 @@ export default {
   async fetch() {
     // build main page here in default layout, so no mater what page is visited, the main page will always be ready to display its sections.
     await this.buildMainPage()
+  },
+
+  computed: {
+    ...mapGetters('user', ['loggedIn']),
   },
 
   beforeMount() {
