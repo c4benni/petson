@@ -1,47 +1,51 @@
 <template>
-  <BaseDialog
-    v-if="currentForm"
-    v-model="modelSync"
-    :transition="transition"
-    content-class="w-[557px] auth-dialog"
-  >
-    <v-container ref="root" class="mb-[49px]">
-      <v-row justify="center" no-gutters>
-        <v-col cols="12" class="flex justify-center">
-          <div
-            class="w-92 h-92 rounded-full primary white--text grid mb-[24px] justify-items-center gap-y-4 content-center"
-          >
-            <Logo height="42.41" width="46.98" />
+  <Transition v-bind="rootTransitionClasses">
+    <BaseDialog
+      v-if="currentForm && !loggedIn"
+      v-model="modelSync"
+      :transition="transition"
+      content-class="w-[557px] auth-dialog"
+    >
+      <v-container ref="root" class="mb-[49px]">
+        <v-row justify="center" no-gutters>
+          <v-col cols="12" class="flex justify-center">
+            <div
+              class="w-92 h-92 rounded-full primary white--text grid mb-[24px] justify-items-center gap-y-4 content-center"
+            >
+              <Logo height="42.41" width="46.98" />
+              <UiText
+                tag="span"
+                variant="body-2"
+                opacity="custom"
+                label="petson."
+              />
+            </div>
+          </v-col>
+
+          <v-col cols="12">
             <UiText
-              tag="span"
-              variant="body-2"
-              opacity="custom"
-              label="petson."
+              id="dialog-title"
+              tag="h2"
+              :label="title"
+              opacity="primary"
+              variant="h5"
+              class="text-center mb-[24px]"
             />
-          </div>
-        </v-col>
+          </v-col>
 
-        <v-col cols="12">
-          <UiText
-            id="dialog-title"
-            tag="h2"
-            :label="title"
-            opacity="primary"
-            variant="h5"
-            class="text-center mb-[24px]"
-          />
-        </v-col>
-
-        <v-col cols="12" class="px-[60px]">
-          <Component :is="currentForm" ref="form" />
-        </v-col>
-      </v-row>
-    </v-container>
-  </BaseDialog>
+          <v-col cols="12" class="px-[60px]">
+            <Component :is="currentForm" ref="form" />
+          </v-col>
+        </v-row>
+      </v-container>
+    </BaseDialog>
+  </Transition>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { queryModal } from '~/components/mixins/routeQueryModal'
+
 const validForms = ['log-in', 'sign-up']
 
 export default {
@@ -61,6 +65,16 @@ export default {
   },
 
   computed: {
+    ...mapGetters('user', ['loggedIn']),
+
+    rootTransitionClasses() {
+      return {
+        leaveClass: 'opacity-0 will-change-[opacity]',
+        leaveActiveClass:
+          'will-change-[opacity] durtion-[500ms] transition-opacity',
+      }
+    },
+
     modelSync: {
       get() {
         if (typeof this.modalQuery === 'string') {
