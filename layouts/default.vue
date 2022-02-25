@@ -21,7 +21,6 @@
 <script>
 import { mapActions } from 'vuex'
 import smoothscroll from 'smoothscroll-polyfill'
-import { getCookie, setCookie } from '~/services/utils'
 
 export default {
   name: 'DefaultLayout',
@@ -31,27 +30,9 @@ export default {
     await this.buildMainPage()
   },
 
-  async beforeMount() {
+  beforeMount() {
     // init smoothscroll polyfill
     smoothscroll.polyfill()
-
-    // automatic login
-    // get cookie, if it exists, set axios header, then dispatch 'user/getInfo'
-    const token = getCookie('token')
-
-    if (token) {
-      this.$axios.setHeader('Authorization', `Bearer ${token}`)
-
-      // try to update the user/info state.
-      // if it fails, clear cookies and Bearer token
-      const { error } = await this.$store.dispatch('user/getInfo')
-
-      if (error) {
-        setCookie('token', '')
-
-        this.$axios.setHeader('Authorization', '')
-      }
-    }
   },
 
   methods: {
