@@ -22,9 +22,9 @@ export default {
   data: () => ({
     search: '',
     breadcrumbs: [
-      { title: 'Homepage', to: '/1' },
-      { title: 'Dogs', to: '/2' },
-      { title: 'Dog food', to: '/3' },
+      { title: 'Homepage', to: '/' },
+      { title: 'Dogs', to: '/' },
+      { title: 'Dog food', to: '/' },
       { title: 'Dry dog food', to: '/' },
       { title: 'Brit Care Endurance', to: '/', disabled: true },
     ],
