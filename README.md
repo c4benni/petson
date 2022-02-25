@@ -21,7 +21,7 @@ $ npm run generate
 
 For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
 
-## Components
+## Components 👀
 
 Custom components are created and automatically imported using NuxtJS Component structure;
 This means a path like components/Button/index.vue will yield `<Button/>` and a path like components/Tables/Head will yield `<TableHead/>`. To lazily load a component, simply prefix it with 'lazy'. E.g <LazyButton/> <LazyTableHead/>
