@@ -1,12 +1,6 @@
 export default {
     theme: {
         options: {
-            themeCache: process.env.NODE_ENV === 'production' ?
-                {
-                    get: (key) => localStorage.getItem(key),
-                    set: (key, value) => localStorage.setItem(key, value),
-                } :
-                undefined,
             customProperties: true,
             variations: false,
         },
