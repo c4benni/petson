@@ -8,9 +8,15 @@
   >
     <v-card>
       <header class="p-[24px] flex justify-end pb-[6px]">
-        <Tooltip label="Close">
-          <v-icon @click="modelSync = false">mdi-close</v-icon>
-        </Tooltip>
+        <v-tooltip bottom>
+          <template #activator="{ attrs, on }">
+            <v-icon v-bind="attrs" v-on="on" @click="modelSync = false"
+              >mdi-close</v-icon
+            >
+          </template>
+
+          <span>Close</span>
+        </v-tooltip>
       </header>
 
       <slot />

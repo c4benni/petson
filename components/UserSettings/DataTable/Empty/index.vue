@@ -36,11 +36,15 @@
           :label="loading ? 'Loading...' : 'Nothing to show'"
         />
 
-        <Tooltip v-if="!loading" label="Refresh">
-          <v-btn icon @click="$emit('on-refresh')">
-            <v-icon>mdi-refresh</v-icon>
-          </v-btn>
-        </Tooltip>
+        <v-tooltip bottom>
+          <template #activator="{ attrs, on }">
+            <v-btn icon v-bind="attrs" v-on="on" @click="$emit('on-refresh')">
+              <v-icon>mdi-refresh</v-icon>
+            </v-btn>
+          </template>
+
+          <span>Refresh</span>
+        </v-tooltip>
       </td>
     </tr>
   </tbody>
