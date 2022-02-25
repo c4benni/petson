@@ -135,7 +135,7 @@ export default {
     },
 
     router: {
-        base: '/petson',
+        base: '/petson/',
         middleware: 'auth',
     },
 
