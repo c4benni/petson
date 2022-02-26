@@ -16,7 +16,7 @@ async function autoLogin({ app, $axios, redirect, store }) {
             // send back home
             redirect('/')
 
-            this.$axios.setHeader('Authorization', '')
+            $axios.setHeader('Authorization', '')
         }
     }
 }
