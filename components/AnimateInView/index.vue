@@ -30,7 +30,7 @@ export default {
   data: () => ({
     intersected: false,
 
-    itersectionObserver: null,
+    intersectionObserver: null,
   }),
 
   mounted() {
@@ -43,7 +43,7 @@ export default {
 
   methods: {
     connect() {
-      this.itersectionObserver = new IntersectionObserver((entries) => {
+      this.intersectionObserver = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
           this.intersected = true
 
@@ -51,14 +51,14 @@ export default {
         }
       }, {})
 
-      this.itersectionObserver.observe(this.$el)
+      this.intersectionObserver.observe(this.$el)
     },
 
     disconnect() {
-      if (this.itersectionObserver) {
-        this.itersectionObserver.unobserve(this.$el)
-        this.itersectionObserver.disconnect()
-        this.itersectionObserver = null
+      if (this.intersectionObserver) {
+        this.intersectionObserver.unobserve(this.$el)
+        this.intersectionObserver.disconnect()
+        this.intersectionObserver = null
       }
     },
   },
