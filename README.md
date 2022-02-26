@@ -5,7 +5,7 @@
 ## Components 👀
 
 Custom components are created and automatically imported using NuxtJS Component structure;
-This means a path like components/Button/index.vue will yield `<Button/>` and a path like components/Tables/Head will yield `<TableHead/>`. To lazily load a component, simply prefix it with 'lazy'. E.g <LazyButton/> <LazyTableHead/>
+This means a path like *components/Button/index.vue* will yield `<Button/>` and a path like *components/Tables/Head/index.vue* will yield `<TableHead/>`. To lazily load a component, simply prefix it with 'lazy'. E.g `<LazyButton/>`, `<LazyTableHead/>`
 Read more about it [here](https://nuxtjs.org/docs/2.x/directory-structure/components).
 
 > Vuetify core components are kebab-cased e.g `<v-btn/>` while custom components are PascalCased eg `<Button/>`
