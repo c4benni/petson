@@ -30,24 +30,19 @@
 
 <script>
 import recoverPassword from '~/components/mixins/recoverPassword'
+import resetPassword from '~/services/auth/user/resetPassword'
 
 export default {
   name: 'ChangePasswordForm',
 
   mixins: [recoverPassword],
 
+  emits: ['on-request'],
+
   data: () => ({
     password: '',
     confirmPassword: '',
   }),
-
-  computed: {
-    submitPayload() {
-      const { password, confirmPassword } = this
-
-      return { password, confirmPassword }
-    },
-  },
 
   methods: {
     resetForm() {
@@ -56,6 +51,46 @@ export default {
       this.confirmPassword = ''
 
       this.$refs.form.resetValidation()
+    },
+
+    async apiCall() {
+      // redirect back to forgot-password if no email or no token in $route.query;
+      const { email, token } = this.$route.query
+
+      if (!email || !token) {
+        await this.$notify.open('Please request for another token.', 3000)
+
+        return this.$router.replace('/forgot-password')
+      }
+
+      this.loading = true
+
+      await this.$nextTick()
+
+      const { password, confirmPassword } = this
+
+      const { error, data } = await resetPassword.call(this, {
+        password,
+        confirmPassword,
+        email,
+        token,
+      })
+
+      this.$emit('on-request', { error, data })
+
+      if (error) {
+        scrollTo({
+          left: 0,
+          top: 0,
+          behavior: 'smooth',
+        })
+      } else if (data) {
+        await this.$notify.open('Password successfully changed!', 3000)
+      }
+
+      this.resetForm()
+
+      this.loading = false
     },
   },
 }
