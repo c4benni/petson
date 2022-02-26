@@ -7,6 +7,7 @@ export default {
 
     methods: {
         async submit() {
+            // validate form
             const formRef = this.$refs.form
 
             if (formRef) {
@@ -15,10 +16,11 @@ export default {
 
             await this.$nextTick()
 
+            // make request
             if (this.valid) {
                 this.loading = true
 
-                await this.apiCall('on-submit', this.submitPayload)
+                await this.apiCall()
 
                 this.loading = false
             }

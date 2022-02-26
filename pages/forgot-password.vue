@@ -25,7 +25,10 @@
       <v-col cols="12">
         <FormAlert :error="error" />
 
-        <FormRecoverPassword />
+        <FormRecoverPassword
+          @on-request="onRequest"
+          @show-dialog="showDialog"
+        />
       </v-col>
     </v-row>
 
@@ -49,6 +52,23 @@ export default {
 
   head: {
     title: 'Forgot password',
+  },
+
+  methods: {
+    // handle the resolved request for a password link.
+    // if error, show an error alert by changing this.error to a truthy value (error object).
+    onRequest({ error }) {
+      this.error = error || null
+    },
+
+    // set the links, and show recovery link dialog.
+    async showDialog(changePasswordLink) {
+      this.changePasswordLink = changePasswordLink
+
+      await this.$nextTick()
+
+      this.dialog = true
+    },
   },
 }
 </script>

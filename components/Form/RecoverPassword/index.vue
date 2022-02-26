@@ -34,27 +34,25 @@ export default {
 
   mixins: [recoverPassword],
 
+  emits: ['on-request', 'show-dialog'],
+
   data: () => ({
     email: '',
   }),
 
-  computed: {
-    submitPayload() {
-      return { email: this.email }
-    },
-  },
-
   methods: {
-    async apiCall({ email }) {
+    async apiCall() {
       this.loading = true
-
-      this.error = null
 
       await this.$nextTick()
 
-      const { data, error } = await forgotPassword.call(this, { email })
+      const { email } = this
 
-      this.error = error
+      const { error, data } = await forgotPassword.call(this, {
+        email,
+      })
+
+      this.$emit('on-request', { error, data })
 
       if (error) {
         scrollTo({
@@ -67,14 +65,12 @@ export default {
       if (data && data.reset_token) {
         const shortLink = `/change-password?token=${data.reset_token}`
 
-        this.changePasswordLink = {
-          title: `${location.origin}${shortLink}`,
-          link: `${shortLink}&email=${email}`,
-        }
-
         await this.$nextTick()
 
-        this.dialog = true
+        this.$emit('show-dialog', {
+          title: `${location.origin}${shortLink}`,
+          link: `${shortLink}&email=${email}`,
+        })
       }
 
       this.loading = false
