@@ -91,6 +91,9 @@ export default {
                 common: {
                     Accept: 'application/json, text/plain, */*',
                     'Content-Type': 'application/json',
+                    'Cache-Control': 'no-cache',
+                    Pragma: 'no-cache',
+                    Expires: '0',
                 },
             },
         },
