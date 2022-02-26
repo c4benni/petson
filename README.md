@@ -29,7 +29,63 @@ Read more about it [here](https://nuxtjs.org/docs/2.x/directory-structure/compon
 
 > Vuetify core components are kebab-cased e.g `<v-btn/>` while custom components are PascalCased eg `<Button/>`
 
-## Story book
+## Route Query Modal 👀‼
+
+Route Query Modal or Query Modal as you'll see in some directories, are modals/dialogs that are triggered by the `'modal'` property on the route query `$route.query.modal`.
+
+### Feat
+
+- Open state is handled by the route. This means a refresh won't change the state.
+
+- Easily open specific dialog immediately from any where in the app. Eg log in dialog.
+
+### Possible values
+
+#### `?modal=log-in`
+
+- Shows the log in dialog when a client isn't logged in.
+
+- Auto shows log in on a `401` error request.
+
+#### `?modal=sign-up`
+
+- Shows the sign up dialog when a client isn't logged in.
+
+#### `?modal=user-settings`
+
+- Shows the user settings dialog to logged in clients
+
+## Active Routes and Pages 👀
+
+### `/`
+
+- user/customer main page or home page
+
+### `/forgot-password`
+
+- Page to trigger forgot password recovery link
+
+### `/change-password`
+
+- Page to set a new password.
+
+## In Progress Routes\*
+
+### `/cart`
+
+- Shows items in cart
+
+### `/product/${uuid}`
+
+- Shows a product with add to bag button, order quantity, and product description
+
+### `/categories/${uuid}`
+
+- Shows a particular category to shop from
+
+##
+
+## Story Book
 
 ```bash
 npx nuxt storybook

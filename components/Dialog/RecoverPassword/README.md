@@ -1,6 +1,6 @@
 # DialogRecoverPassword
 
-Regular dialog that displays the link to change paswword from `/recover-password` route.
+Regular dialog that displays the link to change password from `/recover-password` route.
 
 ## Syntax
 
