@@ -2,25 +2,6 @@
 
 # Petson
 
-## Build Setup
-
-```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
-
 ## Components 👀
 
 Custom components are created and automatically imported using NuxtJS Component structure;
@@ -83,7 +64,26 @@ Route Query Modal or Query Modal as you'll see in some directories, are modals/d
 
 - Shows a particular category to shop from
 
-##
+
+## Build Setup
+
+```bash
+# install dependencies
+$ npm install
+
+# serve with hot reload at localhost:3000
+$ npm run dev
+
+# build for production and launch server
+$ npm run build
+$ npm run start
+
+# generate static project
+$ npm run generate
+```
+
+For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+
 
 ## Story Book
 
