@@ -4,6 +4,7 @@ const description =
     'Pseudo pet store. Get all your faux pet food and toys in a few clicks.'
 
 export default {
+    target: 'static',
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
         titleTemplate: '%s - Petson',
