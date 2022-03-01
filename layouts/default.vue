@@ -10,11 +10,13 @@
 
     <Footer />
 
-    <LazyDialogUserSettings v-if="loggedIn" />
+    <ClientOnly>
+      <LazyDialogUserSettings v-if="loggedIn" />
 
-    <DialogAuth />
+      <DialogAuth />
 
-    <LazySnackbar />
+      <LazySnackbar />
+    </ClientOnly>
   </v-app>
 </template>
 
@@ -25,13 +27,13 @@ import smoothscroll from 'smoothscroll-polyfill'
 export default {
   name: 'DefaultLayout',
 
-  async fetch() {
-    // build main page here in default layout, so no mater what page is visited, the main page will always be ready to display its sections.
-    await this.buildMainPage()
-  },
-
   computed: {
     ...mapGetters('user', ['loggedIn']),
+  },
+
+  async created() {
+    // build main page here in default layout, so no matter what page is visited, the main page will always be ready to display its sections.
+    await this.buildMainPage()
   },
 
   beforeMount() {
