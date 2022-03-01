@@ -7,21 +7,23 @@
         Logout
       </HeaderActionBtn>
 
-      <v-tooltip bottom>
-        <template #activator="{ attrs, on }">
-          <Avatar
-            v-ripple
-            size="48"
-            :to="userSetting"
-            variant="h6"
-            class="ml-[22px] cursor-pointer border border-[#fff]"
-            v-bind="attrs"
-            v-on="on"
-          />
-        </template>
+      <ClientOnly>
+        <v-tooltip bottom>
+          <template #activator="{ attrs, on }">
+            <Avatar
+              v-ripple
+              size="48"
+              :to="userSetting"
+              variant="h6"
+              class="ml-[22px] cursor-pointer border border-[#fff]"
+              v-bind="attrs"
+              v-on="on"
+            />
+          </template>
 
-        <span>Settings</span>
-      </v-tooltip>
+          <span>Settings</span>
+        </v-tooltip>
+      </ClientOnly>
     </div>
   </v-fade-transition>
 </template>
