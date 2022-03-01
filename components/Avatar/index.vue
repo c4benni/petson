@@ -1,5 +1,12 @@
 <template>
-  <v-avatar v-if="info" :color="color" :size="size" aria-label="Avatar">
+  <v-avatar
+    v-if="info"
+    :color="color"
+    :size="size"
+    aria-label="Avatar"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
     <UiText
       v-if="!info.avatar"
       :tag="to ? 'NuxtLink' : 'span'"
@@ -14,7 +21,7 @@
       v-else
       :width="size"
       :height="size"
-      class="rounded"
+      class="rounded-full"
       :src="info.avatar"
       alt="User avatar"
       :uuid="info.avatar"
